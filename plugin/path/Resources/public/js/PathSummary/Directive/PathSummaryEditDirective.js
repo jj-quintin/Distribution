@@ -13,14 +13,18 @@
                     title: '='
                 },
                 bindToController: true,
-                link: function (scopre, element, attr) {
-                    /*element.affix({
+                link: function (scope, element, attr) {
+                    element.affix({
                         offset: {
+                            top: function () {
+                                return ($('#top_bar').outerHeight(true))
+                            },
                             bottom: function () {
-                                return (this.bottom = $('#footer').outerHeight(true))
+                                
+                                return ($('#footer').outerHeight(true))
                             }
                         }
-                    })*/
+                    })
                 }
             };
         }

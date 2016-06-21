@@ -14,6 +14,10 @@
 {% endblock %}
 
 {% block content %}
+    <div class="visible-xs">
+        {{ block("leftbar") }}
+    </div>
+
     {% block path_wizard %}{% endblock %}
 {% endblock %}
 
