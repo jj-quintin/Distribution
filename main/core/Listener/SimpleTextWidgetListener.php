@@ -15,11 +15,12 @@ use Claroline\CoreBundle\Entity\Widget\SimpleTextConfig;
 use Claroline\CoreBundle\Event\DisplayWidgetEvent;
 use Claroline\CoreBundle\Event\ConfigureWidgetEvent;
 use Claroline\CoreBundle\Event\CopyWidgetConfigurationEvent;
-use Claroline\CoreBundle\Form\Factory\FormFactory;
+use Claroline\CoreBundle\Form\SimpleTextType;
 use Claroline\CoreBundle\Manager\SimpleTextManager;
 use Claroline\CoreBundle\Persistence\ObjectManager;
 use JMS\DiExtraBundle\Annotation as DI;
 use Symfony\Bundle\TwigBundle\TwigEngine;
+use Symfony\Component\Form\FormFactory;
 
 /**
  * @DI\Service
@@ -34,11 +35,11 @@ class SimpleTextWidgetListener
 
     /**
      * @DI\InjectParams({
-     *     "simpleTextManager" = @DI\Inject("claroline.manager.simple_text_manager"),
-     *     "formFactory"       = @DI\Inject("claroline.form.factory"),
-     *     "templating"        = @DI\Inject("templating"),
-     *     "om"                = @DI\Inject("claroline.persistence.object_manager"),
-     *     "router"            = @DI\Inject("router")
+     *      "simpleTextManager" = @DI\Inject("claroline.manager.simple_text_manager"),
+     *      "formFactory"       = @DI\Inject("form.factory"),
+     *      "templating"        = @DI\Inject("templating"),
+     *      "om"                = @DI\Inject("claroline.persistence.object_manager"),
+     *      "router"            = @DI\Inject("router")
      * })
      */
     public function __construct(
@@ -84,17 +85,10 @@ class SimpleTextWidgetListener
             $txtConfig->setWidgetInstance($instance);
         }
 
-        $form = $this->formFactory->create(
-            FormFactory::TYPE_SIMPLE_TEXT,
-            array('widget_text_'.rand(0, 1000000000)),
-            $txtConfig
-        );
+        $form = $this->formFactory->create(new SimpleTextType('widget_text_'.rand(0, 1000000000)), $txtConfig);
         $content = $this->templating->render(
             'ClarolineCoreBundle:Widget:config_simple_text_form.html.twig',
-            array(
-                'form' => $form->createView(),
-                'config' => $instance,
-            )
+            ['form' => $form->createView(), 'config' => $instance]
         );
         $event->setContent($content);
     }
