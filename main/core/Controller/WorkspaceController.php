@@ -444,9 +444,9 @@ class WorkspaceController extends Controller
         $workspace = $this->workspaceManager->getWorkspaceByCode($workspace->getCode());
         $this->toolManager->addMissingWorkspaceTools($workspace);
 
-        if ($_breadcrumbs !== null) {
+        if ($_breadcrumbs != null) {
             //for manager.js, id = 0 => "no root".
-            if ($_breadcrumbs[0] !== 0) {
+            if ($_breadcrumbs[0] != 0) {
                 $rootId = $_breadcrumbs[0];
             } else {
                 $rootId = $_breadcrumbs[1];
