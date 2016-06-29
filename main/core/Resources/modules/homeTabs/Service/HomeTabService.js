@@ -34,19 +34,23 @@ export default class HomeTabService {
     this._removeUserHomeTabCallback = this._removeUserHomeTabCallback.bind(this)
   }
 
-  _addUserHomeTabCallback(data) {
+  _addUserHomeTabCallback (d) {
+    const data = this.formatHTCDatas(d)
     this.userHomeTabs.push(data)
   }
 
-  _addWorkspaceHomeTabCallback(data) {
+  _addWorkspaceHomeTabCallback (d) {
+    const data = this.formatHTCDatas(d)
     this.workspaceHomeTabs.push(data)
   }
 
-  _addAdminHomeTabCallback(data) {
+  _addAdminHomeTabCallback (d) {
+    const data = this.formatHTCDatas(d)
     this.adminHomeTabs.push(data)
   }
 
-  _updateUserHomeTabCallback(data) {
+  _updateUserHomeTabCallback (d) {
+    const data = this.formatHTCDatas(d)
     if (data['tabId']) {
       const index = this.userHomeTabs.findIndex(tab => data['tabId'] === tab['tabId'])
 
@@ -57,7 +61,8 @@ export default class HomeTabService {
     }
   }
 
-  _updateWorkspaceHomeTabCallback(data) {
+  _updateWorkspaceHomeTabCallback (d) {
+    const data = this.formatHTCDatas(d)
     if (data['tabId']) {
       const index = this.workspaceHomeTabs.findIndex(tab => data['tabId'] === tab['tabId'])
 
@@ -70,7 +75,8 @@ export default class HomeTabService {
     }
   }
 
-  _updateAdminHomeTabCallback(data) {
+  _updateAdminHomeTabCallback (d) {
+    const data = this.formatHTCDatas(d)
     if (data['tabId']) {
       const index = this.adminHomeTabs.findIndex(tab => data['tabId'] === tab['tabId'])
 
@@ -84,7 +90,8 @@ export default class HomeTabService {
     }
   }
 
-  _removeAdminHomeTabCallback(data) {
+  _removeAdminHomeTabCallback (d) {
+    const data = this.formatHTCDatas(d)
     if (data['tabId']) {
       const index = this.adminHomeTabs.findIndex(tab => data['tabId'] === tab['tabId'])
 
@@ -98,7 +105,8 @@ export default class HomeTabService {
     }
   }
 
-  _removeUserHomeTabCallback(data) {
+  _removeUserHomeTabCallback (d) {
+    const data = this.formatHTCDatas(d)
     if (data['tabId']) {
       const index = this.userHomeTabs.findIndex(tab => data['tabId'] === tab['tabId'])
 
@@ -112,7 +120,8 @@ export default class HomeTabService {
     }
   }
 
-  _removeWorkspaceHomeTabCallback(data) {
+  _removeWorkspaceHomeTabCallback (d) {
+    const data = this.formatHTCDatas(d)
     if (data['tabId']) {
       const index = this.workspaceHomeTabs.findIndex(tab => data['tabId'] === tab['tabId'])
 
@@ -126,23 +135,59 @@ export default class HomeTabService {
     }
   }
 
-  getAdminHomeTabs() {
+  getAdminHomeTabs () {
     return this.adminHomeTabs
   }
 
-  getUserHomeTabs() {
+  getUserHomeTabs () {
     return this.userHomeTabs
   }
 
-  getWorkspaceHomeTabs() {
+  getWorkspaceHomeTabs () {
     return this.workspaceHomeTabs
   }
 
-  getOptions() {
+  getOptions () {
     return this.options
   }
 
-  loadDesktopHomeTabs() {
+  homeTabsParse (datas) {
+    let parsedDatas = []
+    datas.forEach(d => {
+      parsedDatas.push(JSON.parse(d))
+    })
+
+    return parsedDatas
+  }
+
+  formatHTCDatas (datas) {
+    let jsonDatas = JSON.parse(datas)
+    jsonDatas['tabId'] = jsonDatas['hometab']['id']
+    jsonDatas['tabName'] = jsonDatas['hometab']['name']
+    jsonDatas['tabType'] = jsonDatas['hometab']['type']
+    jsonDatas['tabIcon'] = jsonDatas['hometab']['icon']
+
+    if (jsonDatas['details']['color']) {
+      jsonDatas['color'] = jsonDatas['details']['color']
+    }
+
+    return jsonDatas
+  }
+
+  generateHomeTabsInfos (homeTabs) {
+    homeTabs.forEach(h => {
+      h['tabId'] = h['hometab']['id']
+      h['tabName'] = h['hometab']['name']
+      h['tabType'] = h['hometab']['type']
+      h['tabIcon'] = h['hometab']['icon']
+
+      if (h['details']['color']) {
+        h['color'] = h['details']['color']
+      }
+    })
+  }
+
+  loadDesktopHomeTabs () {
     const route = Routing.generate('api_get_desktop_home_tabs')
 
     return this.$http.get(route).then(datas => {
@@ -150,39 +195,44 @@ export default class HomeTabService {
         this.adminHomeTabs.splice(0, this.adminHomeTabs.length)
         this.userHomeTabs.splice(0, this.userHomeTabs.length)
         this.workspaceHomeTabs.splice(0, this.workspaceHomeTabs.length)
-        angular.merge(this.adminHomeTabs, datas['data']['tabsAdmin'])
-        angular.merge(this.userHomeTabs, datas['data']['tabsUser'])
-        angular.merge(this.workspaceHomeTabs, datas['data']['tabsWorkspace'])
+        angular.merge(this.adminHomeTabs, this.homeTabsParse(datas['data']['tabsAdmin']))
+        angular.merge(this.userHomeTabs, this.homeTabsParse(datas['data']['tabsUser']))
+        angular.merge(this.workspaceHomeTabs, this.homeTabsParse(datas['data']['tabsWorkspace']))
+        this.generateHomeTabsInfos(this.adminHomeTabs)
+        this.generateHomeTabsInfos(this.userHomeTabs)
+        this.generateHomeTabsInfos(this.workspaceHomeTabs)
         this.selectDefaultHomeTab()
       }
     })
   }
 
-  loadAdminHomeTabs() {
+  loadAdminHomeTabs () {
     const route = Routing.generate('api_get_admin_home_tabs')
 
     return this.$http.get(route).then(datas => {
       if (datas['status'] === 200) {
         this.adminHomeTabs.splice(0, this.adminHomeTabs.length)
-        angular.merge(this.adminHomeTabs, datas['data'])
+        angular.merge(this.adminHomeTabs, this.homeTabsParse(datas['data']))
+        this.generateHomeTabsInfos(this.adminHomeTabs)
         this.selectDefaultAdminHomeTab()
       }
     })
   }
 
-  loadWorkspaceHomeTabs() {
+  loadWorkspaceHomeTabs () {
     const route = Routing.generate('api_get_workspace_home_tabs', {workspace: this.options['workspaceId']})
 
     return this.$http.get(route).then(datas => {
       if (datas['status'] === 200) {
         this.workspaceHomeTabs.splice(0, this.workspaceHomeTabs.length)
-        angular.merge(this.workspaceHomeTabs, datas['data'])
+        angular.merge(this.workspaceHomeTabs, this.homeTabsParse(datas['data']))
+        this.generateHomeTabsInfos(this.workspaceHomeTabs)
         this.selectDefaultWorkspaceHomeTab()
       }
     })
   }
 
-  selectDefaultAdminHomeTab() {
+  selectDefaultAdminHomeTab () {
     this.options['selectedTabId'] = 0
     this.options['selectedTabConfigId'] = 0
 
@@ -193,7 +243,7 @@ export default class HomeTabService {
     this.WidgetService.loadAdminWidgets(this.options['selectedTabId'])
   }
 
-  selectDefaultWorkspaceHomeTab() {
+  selectDefaultWorkspaceHomeTab () {
     this.options['selectedTabId'] = 0
     this.options['selectedTabConfigId'] = 0
 
@@ -204,7 +254,7 @@ export default class HomeTabService {
     this.WidgetService.loadWorkspaceWidgets(this.options['selectedTabId'])
   }
 
-  selectDefaultHomeTab() {
+  selectDefaultHomeTab () {
     this.options['selectedTabId'] = 0
     this.options['selectedTabConfigId'] = 0
     this.options['selectedTabIsLocked'] = true
@@ -225,7 +275,7 @@ export default class HomeTabService {
     this.WidgetService.loadDesktopWidgets(this.options['selectedTabId'], this.options['canEdit'])
   }
 
-  createUserHomeTab() {
+  createUserHomeTab () {
     if (this.options['canEdit']) {
       const modal = this.$uibModal.open({
         templateUrl: Routing.generate('api_get_user_home_tab_creation_form'),
@@ -246,7 +296,7 @@ export default class HomeTabService {
     }
   }
 
-  editUserHomeTab(tabId) {
+  editUserHomeTab (tabId) {
     if (this.options['canEdit']) {
       const modal = this.$uibModal.open({
         templateUrl: Routing.generate(
@@ -271,7 +321,7 @@ export default class HomeTabService {
     }
   }
 
-  hideAmdinHomeTab(tabConfigId) {
+  hideAmdinHomeTab (tabConfigId) {
     if (this.options['canEdit']) {
       const url = Routing.generate('api_put_admin_home_tab_visibility_toggle', {htc: tabConfigId})
 
@@ -284,7 +334,7 @@ export default class HomeTabService {
     }
   }
 
-  deleteUserHomeTab(tabConfigId) {
+  deleteUserHomeTab (tabConfigId) {
     if (this.options['canEdit']) {
       const url = Routing.generate('api_delete_user_home_tab', {htc: tabConfigId})
 
@@ -297,7 +347,7 @@ export default class HomeTabService {
     }
   }
 
-  deletePinnedWorkspaceHomeTab(tabConfigId) {
+  deletePinnedWorkspaceHomeTab (tabConfigId) {
     const url = Routing.generate('api_delete_pinned_workspace_home_tab', {htc: tabConfigId})
 
     this.ClarolineAPIService.confirm(
@@ -308,7 +358,7 @@ export default class HomeTabService {
     )
   }
 
-  createAdminHomeTab() {
+  createAdminHomeTab () {
     const modal = this.$uibModal.open({
       templateUrl: Routing.generate('api_get_admin_home_tab_creation_form'),
       controller: 'AdminHomeTabCreationModalCtrl',
@@ -327,7 +377,7 @@ export default class HomeTabService {
     })
   }
 
-  editAdminHomeTab(tabConfigId) {
+  editAdminHomeTab (tabConfigId) {
     const modal = this.$uibModal.open({
       templateUrl: Routing.generate(
         'api_get_admin_home_tab_edition_form',
@@ -350,7 +400,7 @@ export default class HomeTabService {
     })
   }
 
-  deleteAdminHomeTab(tabConfigId) {
+  deleteAdminHomeTab (tabConfigId) {
     const url = Routing.generate('api_delete_admin_home_tab', {homeTabConfig: tabConfigId})
 
     this.ClarolineAPIService.confirm(
@@ -361,7 +411,7 @@ export default class HomeTabService {
     )
   }
 
-  createWorkspaceHomeTab() {
+  createWorkspaceHomeTab () {
     const modal = this.$uibModal.open({
       templateUrl: Routing.generate('api_get_workspace_home_tab_creation_form', {workspace: this.options['workspaceId']}),
       controller: 'WorkspaceHomeTabCreationModalCtrl',
@@ -381,7 +431,7 @@ export default class HomeTabService {
     })
   }
 
-  editWorkspaceHomeTab(tabConfigId) {
+  editWorkspaceHomeTab (tabConfigId) {
     const modal = this.$uibModal.open({
       templateUrl: Routing.generate(
         'api_get_workspace_home_tab_edition_form',
@@ -405,7 +455,7 @@ export default class HomeTabService {
     })
   }
 
-  deleteWorkspaceHomeTab(tabConfigId) {
+  deleteWorkspaceHomeTab (tabConfigId) {
     const url = Routing.generate('api_delete_workspace_home_tab', {homeTabConfig: tabConfigId})
 
     this.ClarolineAPIService.confirm(
@@ -416,7 +466,7 @@ export default class HomeTabService {
     )
   }
 
-  pinWorkspaceHomeTab(tabConfigId) {
+  pinWorkspaceHomeTab (tabConfigId) {
     const url = Routing.generate('api_post_workspace_home_tab_bookmark', {homeTabConfig: tabConfigId})
 
     this.ClarolineAPIService.confirm(

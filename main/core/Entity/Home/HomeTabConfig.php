@@ -36,7 +36,7 @@ class HomeTabConfig
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Groups({"api_home_tab"})
-     * @SerializedName("id")
+     * @SerializedName("configId")
      */
     protected $id;
 
@@ -46,7 +46,7 @@ class HomeTabConfig
      * )
      * @ORM\JoinColumn(name="home_tab_id", nullable=false, onDelete="CASCADE")
      * @Groups({"api_home_tab"})
-     * @SerializedName("home_tab")
+     * @SerializedName("hometab")
      */
     protected $homeTab;
 
@@ -90,7 +90,7 @@ class HomeTabConfig
     /**
      * @ORM\Column(type="integer", name="tab_order")
      * @Groups({"api_home_tab"})
-     * @SerializedName("tab_order")
+     * @SerializedName("tabOrder")
      */
     protected $tabOrder;
 

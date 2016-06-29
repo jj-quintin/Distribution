@@ -57,7 +57,8 @@ export default class WidgetService {
     this._removeWidgetCallback = this._removeWidgetCallback.bind(this)
   }
 
-  _addWidgetCallback (data) {
+  _addWidgetCallback (d) {
+    const data = this.parseWidgetDatas(d)
     this.widgetsDisplayOptions[data['displayId']] = {
       id: data['displayId'],
       row: data['row'],
@@ -80,7 +81,8 @@ export default class WidgetService {
     }
   }
 
-  _removeWidgetCallback (data) {
+  _removeWidgetCallback (d) {
+    const data = JSON.parse(d)
     if (data['id']) {
       const index = this.widgets.findIndex(w => data['id'] === w['instanceId'])
 
@@ -111,6 +113,75 @@ export default class WidgetService {
     this.type = type;
   }
 
+  parseWidgetDatas (datas) {
+    let widgetDatas = {}
+    const config = datas['config'] ? JSON.parse(datas['config']) : null
+    const display = datas['display'] ? JSON.parse(datas['display']) : null
+    widgetDatas['configurable'] = datas['configurable'] ? datas['configurable'] : null
+
+    if (config !== null) {
+      widgetDatas['configId'] = config['id']
+      widgetDatas['locked'] = config['locked']
+      widgetDatas['visible'] = config['visible']
+      widgetDatas['type'] = config['type']
+    }
+
+    if (display !== null) {
+      widgetDatas['displayId'] = display['id']
+      widgetDatas['row'] = display['row'] >= 0 ? display['row'] : null
+      widgetDatas['col'] = display['column'] >= 0 ? display['column'] : null
+      widgetDatas['sizeX'] = display['width']
+      widgetDatas['sizeY'] = display['height']
+      widgetDatas['color'] = display['color']
+      widgetDatas['textTitleColor'] = display['details']['textTitleColor'] ? display['details']['textTitleColor'] : null
+
+      widgetDatas['instanceId'] = display['widgetInstance']['id']
+      widgetDatas['instanceName'] = display['widgetInstance']['name']
+      widgetDatas['instanceIcon'] = display['widgetInstance']['icon']
+
+      widgetDatas['widgetId'] = display['widgetInstance']['widget']['id']
+      widgetDatas['widgetName'] = display['widgetInstance']['widget']['name']
+    }
+
+    return widgetDatas
+  }
+
+
+  generateWidgetsDatas (datas) {
+    let widgetsDatas = []
+    datas.forEach(d => {
+      let widgetDatas = {}
+      const config = JSON.parse(d['config'])
+      const display = JSON.parse(d['display'])
+      widgetDatas['content'] = d['content']
+      widgetDatas['configurable'] = d['configurable']
+
+      widgetDatas['configId'] = config['id']
+      widgetDatas['locked'] = config['locked']
+      widgetDatas['visible'] = config['visible']
+      widgetDatas['type'] = config['type']
+
+      widgetDatas['instanceId'] = config['widgetInstance']['id']
+      widgetDatas['instanceName'] = config['widgetInstance']['name']
+      widgetDatas['instanceIcon'] = config['widgetInstance']['icon']
+
+      widgetDatas['widgetId'] = config['widgetInstance']['widget']['id']
+      widgetDatas['widgetName'] = config['widgetInstance']['widget']['name']
+
+      widgetDatas['displayId'] = display['id']
+      widgetDatas['row'] = display['row'] >= 0 ? display['row'] : null
+      widgetDatas['col'] = display['column'] >= 0 ? display['column'] : null
+      widgetDatas['sizeX'] = display['width']
+      widgetDatas['sizeY'] = display['height']
+      widgetDatas['color'] = display['color']
+      widgetDatas['textTitleColor'] = display['details']['textTitleColor'] ? display['details']['textTitleColor'] : null
+
+      widgetsDatas.push(widgetDatas)
+    })
+
+    return widgetsDatas
+  }
+
   loadDesktopWidgets (tabId, isEditionEnabled) {
     this.options['canEdit'] = false
 
@@ -122,7 +193,7 @@ export default class WidgetService {
         if (datas['status'] === 200) {
           this.options['canEdit'] = isEditionEnabled && !datas['data']['isLockedHomeTab']
           this.widgets.splice(0, this.widgets.length)
-          angular.merge(this.widgets, datas['data']['widgets'])
+          angular.merge(this.widgets, this.generateWidgetsDatas(datas['data']['widgets']))
           this.generateWidgetsDisplayOptions()
           this.checkDesktopWidgetsDisplayOptions()
           this.updateGristerEdition()
@@ -140,7 +211,7 @@ export default class WidgetService {
       this.$http.get(route).then(datas => {
         if (datas['status'] === 200) {
           this.widgets.splice(0, this.widgets.length)
-          angular.merge(this.widgets, datas['data'])
+          angular.merge(this.widgets, this.generateWidgetsDatas(datas['data']))
           this.generateWidgetsDisplayOptions()
           this.checkAdminWidgetsDisplayOptions()
           this.switchGridsterEdition(true)
@@ -158,16 +229,18 @@ export default class WidgetService {
       this.$http.get(route).then(datas => {
         if (datas['status'] === 200) {
           this.widgets.splice(0, this.widgets.length)
-          angular.merge(this.widgets, datas['data'])
+          angular.merge(this.widgets, this.generateWidgetsDatas(datas['data']))
           this.generateWidgetsDisplayOptions()
           this.checkWorkspaceWidgetsDisplayOptions()
+          this.updateGristerEdition()
           this.secureWidgetsContents()
         }
       })
     }
   }
 
-  updateWidget (data) {
+  updateWidget (d) {
+    const data = this.parseWidgetDatas(d)
     const index = this.widgets.findIndex(w => w['instanceId'] === data['instanceId'])
 
     if (index > -1) {

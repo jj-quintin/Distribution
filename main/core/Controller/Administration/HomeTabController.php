@@ -29,6 +29,8 @@ use Claroline\CoreBundle\Manager\ApiManager;
 use Claroline\CoreBundle\Manager\HomeTabManager;
 use Claroline\CoreBundle\Manager\WidgetManager;
 use Claroline\CoreBundle\Manager\PluginManager;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -50,6 +52,7 @@ class HomeTabController extends Controller
     private $homeTabManager;
     private $pluginManager;
     private $request;
+    private $serializer;
     private $widgetManager;
 
     /**
@@ -59,6 +62,7 @@ class HomeTabController extends Controller
      *     "homeTabManager"  = @DI\Inject("claroline.manager.home_tab_manager"),
      *     "pluginManager"   = @DI\Inject("claroline.manager.plugin_manager"),
      *     "request"         = @DI\Inject("request"),
+     *     "serializer"      = @DI\Inject("jms_serializer"),
      *     "widgetManager"   = @DI\Inject("claroline.manager.widget_manager")
      * })
      */
@@ -68,6 +72,7 @@ class HomeTabController extends Controller
         HomeTabManager $homeTabManager,
         PluginManager $pluginManager,
         Request $request,
+        Serializer $serializer,
         WidgetManager $widgetManager
     ) {
         $this->apiManager = $apiManager;
@@ -76,6 +81,7 @@ class HomeTabController extends Controller
         $this->homeTabManager = $homeTabManager;
         $this->pluginManager = $pluginManager;
         $this->request = $request;
+        $this->serializer = $serializer;
         $this->widgetManager = $widgetManager;
     }
 
@@ -114,21 +120,7 @@ class HomeTabController extends Controller
         $hometabConfigs = $this->homeTabManager->getAdminDesktopHomeTabConfigs();
 
         foreach ($hometabConfigs as $htc) {
-            $tab = $htc->getHomeTab();
-            $details = $htc->getDetails();
-            $color = isset($details['color']) ? $details['color'] : null;
-            $datas[] = [
-                'configId' => $htc->getId(),
-                'locked' => $htc->isLocked(),
-                'tabOrder' => $htc->getTabOrder(),
-                'type' => $htc->getType(),
-                'visible' => $htc->isVisible(),
-                'tabId' => $tab->getId(),
-                'tabName' => $tab->getName(),
-                'tabType' => $tab->getType(),
-                'tabIcon' => $tab->getIcon(),
-                'color' => $color,
-            ];
+            $datas[] = $this->serializer->serialize($htc, 'json', SerializationContext::create()->setGroups(['api_home_tab']));
         }
 
         return new JsonResponse($datas, 200);
@@ -210,20 +202,10 @@ class HomeTabController extends Controller
             $event = new LogHomeTabAdminCreateEvent($homeTabConfig);
             $this->eventDispatcher->dispatch('log', $event);
 
-            $homeTabDatas = [
-                'configId' => $homeTabConfig->getId(),
-                'locked' => $homeTabConfig->isLocked(),
-                'tabOrder' => $homeTabConfig->getTabOrder(),
-                'type' => $homeTabConfig->getType(),
-                'visible' => $homeTabConfig->isVisible(),
-                'tabId' => $homeTab->getId(),
-                'tabName' => $homeTab->getName(),
-                'tabType' => $homeTab->getType(),
-                'tabIcon' => $homeTab->getIcon(),
-                'color' => $color,
-            ];
-
-            return new JsonResponse($homeTabDatas, 200);
+            return new JsonResponse(
+                $this->serializer->serialize($homeTabConfig, 'json', SerializationContext::create()->setGroups(['api_home_tab'])),
+                200
+            );
         } else {
             $options = [
                 'http_code' => 400,
@@ -317,20 +299,10 @@ class HomeTabController extends Controller
             $event = new LogHomeTabAdminEditEvent($homeTabConfig);
             $this->eventDispatcher->dispatch('log', $event);
 
-            $homeTabDatas = [
-                'configId' => $homeTabConfig->getId(),
-                'locked' => $homeTabConfig->isLocked(),
-                'tabOrder' => $homeTabConfig->getTabOrder(),
-                'type' => $homeTabConfig->getType(),
-                'visible' => $homeTabConfig->isVisible(),
-                'tabId' => $homeTab->getId(),
-                'tabName' => $homeTab->getName(),
-                'tabType' => $homeTab->getType(),
-                'tabIcon' => $homeTab->getIcon(),
-                'color' => $color,
-            ];
-
-            return new JsonResponse($homeTabDatas, 200);
+            return new JsonResponse(
+                $this->serializer->serialize($homeTabConfig, 'json', SerializationContext::create()->setGroups(['api_home_tab'])),
+                200
+            );
         } else {
             $options = [
                 'http_code' => 400,
@@ -363,24 +335,10 @@ class HomeTabController extends Controller
         $homeTab = $homeTabConfig->getHomeTab();
         $this->checkAdminHomeTab($homeTab, $homeTabType);
         $this->checkAdminHomeTabConfig($homeTabConfig, $homeTabType);
-        $details = $homeTabConfig->getDetails();
-        $color = isset($details['color']) ? $details['color'] : null;
-        $htcDatas = [
-            'configId' => $homeTabConfig->getId(),
-            'locked' => $homeTabConfig->isLocked(),
-            'tabOrder' => $homeTabConfig->getTabOrder(),
-            'type' => $homeTabConfig->getType(),
-            'visible' => $homeTabConfig->isVisible(),
-            'tabId' => $homeTab->getId(),
-            'tabName' => $homeTab->getName(),
-            'tabType' => $homeTab->getType(),
-            'tabIcon' => $homeTab->getIcon(),
-            'color' => $color,
-            'details' => $details,
-        ];
+        $htcDatas = $this->serializer->serialize($homeTabConfig, 'json', SerializationContext::create()->setGroups(['api_home_tab']));
         $this->homeTabManager->deleteHomeTabConfig($homeTabConfig);
         $this->homeTabManager->deleteHomeTab($homeTab);
-        $event = new LogHomeTabAdminDeleteEvent($htcDatas);
+        $event = new LogHomeTabAdminDeleteEvent(json_decode($htcDatas, true));
         $this->eventDispatcher->dispatch('log', $event);
 
         return new JsonResponse($htcDatas, 200);
@@ -432,29 +390,11 @@ class HomeTabController extends Controller
             $widgetInstance = $config->getWidgetInstance();
             $widget = $widgetInstance->getWidget();
             $widgetInstanceId = $widgetInstance->getId();
-            $widgetDatas['widgetId'] = $widget->getId();
-            $widgetDatas['widgetName'] = $widget->getName();
-            $widgetDatas['configId'] = $config->getId();
-            $displayWidgetEvent = new DisplayWidgetEvent($widgetInstance);
-            $event = $this->eventDispatcher->dispatch('widget_'.$widget->getName(), $displayWidgetEvent);
-            $widgetDatas['content'] = $event->getContent();
+            $widgetDatas['config'] = $this->serializer->serialize($config, 'json', SerializationContext::create()->setGroups(['api_widget']));
+            $widgetDatas['display'] = $this->serializer->serialize($wdcs[$widgetInstanceId], 'json', SerializationContext::create()->setGroups(['api_widget']));
             $widgetDatas['configurable'] = $widget->isConfigurable();
-            $widgetDatas['locked'] = $config->isLocked();
-            $widgetDatas['visible'] = $config->isVisible();
-            $widgetDatas['type'] = $config->getType();
-            $widgetDatas['instanceId'] = $widgetInstanceId;
-            $widgetDatas['instanceName'] = $widgetInstance->getName();
-            $widgetDatas['instanceIcon'] = $widgetInstance->getIcon();
-            $widgetDatas['displayId'] = $wdcs[$widgetInstanceId]->getId();
-            $row = $wdcs[$widgetInstanceId]->getRow();
-            $column = $wdcs[$widgetInstanceId]->getColumn();
-            $widgetDatas['row'] = $row >= 0 ? $row : null;
-            $widgetDatas['col'] = $column >= 0 ? $column : null;
-            $widgetDatas['sizeY'] = $wdcs[$widgetInstanceId]->getHeight();
-            $widgetDatas['sizeX'] = $wdcs[$widgetInstanceId]->getWidth();
-            $widgetDatas['color'] = $wdcs[$widgetInstanceId]->getColor();
-            $details = $wdcs[$widgetInstanceId]->getDetails();
-            $widgetDatas['textTitleColor'] = isset($details['textTitleColor']) ? $details['textTitleColor'] : null;
+            $event = $this->eventDispatcher->dispatch('widget_'.$widget->getName(), new DisplayWidgetEvent($widgetInstance));
+            $widgetDatas['content'] = $event->getContent();
             $widgets[] = $widgetDatas;
         }
 
@@ -531,25 +471,10 @@ class HomeTabController extends Controller
             $this->widgetManager->persistWidgetConfigs($widgetInstance, $widgetHomeTabConfig, $widgetDisplayConfig);
             $event = new LogWidgetAdminCreateEvent($homeTab, $widgetHomeTabConfig, $widgetDisplayConfig);
             $this->eventDispatcher->dispatch('log', $event);
-
             $widgetDatas = [
-                'widgetId' => $widget->getId(),
-                'widgetName' => $widget->getName(),
-                'configId' => $widgetHomeTabConfig->getId(),
+                'config' => $this->serializer->serialize($widgetHomeTabConfig, 'json', SerializationContext::create()->setGroups(['api_widget'])),
+                'display' => $this->serializer->serialize($widgetDisplayConfig, 'json', SerializationContext::create()->setGroups(['api_widget'])),
                 'configurable' => $widget->isConfigurable(),
-                'locked' => $widgetHomeTabConfig->isLocked(),
-                'visible' => $widgetHomeTabConfig->isVisible(),
-                'type' => $widgetHomeTabConfig->getType(),
-                'instanceId' => $widgetInstance->getId(),
-                'instanceName' => $widgetInstance->getName(),
-                'instanceIcon' => $widgetInstance->getIcon(),
-                'displayId' => $widgetDisplayConfig->getId(),
-                'row' => null,
-                'col' => null,
-                'sizeY' => $widgetDisplayConfig->getHeight(),
-                'sizeX' => $widgetDisplayConfig->getWidth(),
-                'color' => $color,
-                'textTitleColor' => $textTitleColor,
             ];
 
             return new JsonResponse($widgetDatas, 200);
@@ -650,22 +575,9 @@ class HomeTabController extends Controller
             $this->widgetManager->persistWidgetConfigs($widgetInstance, null, $wdc);
             $event = new LogWidgetAdminEditEvent($widgetInstance, $whtc, $wdc);
             $this->eventDispatcher->dispatch('log', $event);
-
             $widgetDatas = [
-                'widgetId' => $widget->getId(),
-                'widgetName' => $widget->getName(),
-                'instanceId' => $widgetInstance->getId(),
-                'instanceName' => $widgetInstance->getName(),
-                'instanceIcon' => $widgetInstance->getIcon(),
-                'visible' => $visible,
-                'locked' => $locked,
-                'displayId' => $wdc->getId(),
-                'row' => null,
-                'col' => null,
-                'sizeY' => $wdc->getHeight(),
-                'sizeX' => $wdc->getWidth(),
-                'color' => $color,
-                'textTitleColor' => $textTitleColor,
+                'config' => $this->serializer->serialize($whtc, 'json', SerializationContext::create()->setGroups(['api_widget'])),
+                'display' => $this->serializer->serialize($wdc, 'json', SerializationContext::create()->setGroups(['api_widget'])),
             ];
 
             return new JsonResponse($widgetDatas, 200);
@@ -700,34 +612,11 @@ class HomeTabController extends Controller
     public function deleteAdminWidgetHomeTabConfigAction(WidgetHomeTabConfig $widgetHomeTabConfig)
     {
         $this->checkAdminAccessForWidgetHomeTabConfig($widgetHomeTabConfig);
-        $homeTab = $widgetHomeTabConfig->getHomeTab();
         $widgetInstance = $widgetHomeTabConfig->getWidgetInstance();
-        $widget = $widgetInstance->getWidget();
-        $datas = [
-            'tabId' => $homeTab->getId(),
-            'tabName' => $homeTab->getName(),
-            'tabType' => $homeTab->getType(),
-            'tabIcon' => $homeTab->getIcon(),
-            'widgetId' => $widget->getId(),
-            'widgetName' => $widget->getName(),
-            'widgetIsConfigurable' => $widget->isConfigurable(),
-            'widgetIsExportable' => $widget->isExportable(),
-            'widgetIsDisplayableInWorkspace' => $widget->isDisplayableInWorkspace(),
-            'widgetIsDisplayableInDesktop' => $widget->isDisplayableInDesktop(),
-            'id' => $widgetInstance->getId(),
-            'name' => $widgetInstance->getName(),
-            'icon' => $widgetInstance->getIcon(),
-            'isAdmin' => $widgetInstance->isAdmin(),
-            'isDesktop' => $widgetInstance->isDesktop(),
-            'widgetHomeTabConfigId' => $widgetHomeTabConfig->getId(),
-            'order' => $widgetHomeTabConfig->getWidgetOrder(),
-            'type' => $widgetHomeTabConfig->getType(),
-            'visible' => $widgetHomeTabConfig->isVisible(),
-            'locked' => $widgetHomeTabConfig->isLocked(),
-        ];
+        $datas = $this->serializer->serialize($widgetInstance, 'json', SerializationContext::create()->setGroups(['api_widget']));
         $this->homeTabManager->deleteWidgetHomeTabConfig($widgetHomeTabConfig);
         $this->widgetManager->removeInstance($widgetInstance);
-        $event = new LogWidgetAdminDeleteEvent($datas);
+        $event = new LogWidgetAdminDeleteEvent(json_decode($datas, true));
         $this->eventDispatcher->dispatch('log', $event);
 
         return new JsonResponse($datas, 200);

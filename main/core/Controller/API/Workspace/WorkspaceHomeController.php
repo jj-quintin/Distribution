@@ -35,6 +35,8 @@ use Claroline\CoreBundle\Manager\HomeTabManager;
 use Claroline\CoreBundle\Manager\PluginManager;
 use Claroline\CoreBundle\Manager\WidgetManager;
 use JMS\DiExtraBundle\Annotation as DI;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as EXT;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -52,6 +54,7 @@ class WorkspaceHomeController extends Controller
     private $homeTabManager;
     private $pluginManager;
     private $request;
+    private $serializer;
     private $tokenStorage;
     private $utils;
     private $widgetManager;
@@ -64,6 +67,7 @@ class WorkspaceHomeController extends Controller
      *     "homeTabManager"  = @DI\Inject("claroline.manager.home_tab_manager"),
      *     "pluginManager"   = @DI\Inject("claroline.manager.plugin_manager"),
      *     "request"         = @DI\Inject("request"),
+     *     "serializer"      = @DI\Inject("jms_serializer"),
      *     "tokenStorage"    = @DI\Inject("security.token_storage"),
      *     "utils"           = @DI\Inject("claroline.security.utilities"),
      *     "widgetManager"   = @DI\Inject("claroline.manager.widget_manager")
@@ -76,6 +80,7 @@ class WorkspaceHomeController extends Controller
         HomeTabManager $homeTabManager,
         PluginManager $pluginManager,
         Request $request,
+        Serializer $serializer,
         TokenStorageInterface $tokenStorage,
         Utilities $utils,
         WidgetManager $widgetManager
@@ -87,6 +92,7 @@ class WorkspaceHomeController extends Controller
         $this->homeTabManager = $homeTabManager;
         $this->pluginManager = $pluginManager;
         $this->request = $request;
+        $this->serializer = $serializer;
         $this->tokenStorage = $tokenStorage;
         $this->utils = $utils;
         $this->widgetManager = $widgetManager;
@@ -114,21 +120,7 @@ class WorkspaceHomeController extends Controller
             $this->homeTabManager->getVisibleWorkspaceHomeTabConfigsByWorkspaceAndRoles($workspace, $roleNames);
 
         foreach ($hometabConfigs as $htc) {
-            $tab = $htc->getHomeTab();
-            $details = $htc->getDetails();
-            $color = isset($details['color']) ? $details['color'] : null;
-            $datas[] = [
-                'configId' => $htc->getId(),
-                'locked' => $htc->isLocked(),
-                'tabOrder' => $htc->getTabOrder(),
-                'type' => $htc->getType(),
-                'visible' => $htc->isVisible(),
-                'tabId' => $tab->getId(),
-                'tabName' => $tab->getName(),
-                'tabType' => $tab->getType(),
-                'tabIcon' => $tab->getIcon(),
-                'color' => $color,
-            ];
+            $datas[] = $this->serializer->serialize($htc, 'json', SerializationContext::create()->setGroups(['api_home_tab']));
         }
 
         return new JsonResponse($datas, 200);
@@ -206,20 +198,10 @@ class WorkspaceHomeController extends Controller
             $event = new LogHomeTabWorkspaceCreateEvent($homeTabConfig);
             $this->eventDispatcher->dispatch('log', $event);
 
-            $homeTabDatas = [
-                'configId' => $homeTabConfig->getId(),
-                'locked' => $homeTabConfig->isLocked(),
-                'tabOrder' => $homeTabConfig->getTabOrder(),
-                'type' => $homeTabConfig->getType(),
-                'visible' => $homeTabConfig->isVisible(),
-                'tabId' => $homeTab->getId(),
-                'tabName' => $homeTab->getName(),
-                'tabType' => $homeTab->getType(),
-                'tabIcon' => $homeTab->getIcon(),
-                'color' => $color,
-            ];
-
-            return new JsonResponse($homeTabDatas, 200);
+            return new JsonResponse(
+                $this->serializer->serialize($homeTabConfig, 'json', SerializationContext::create()->setGroups(['api_home_tab'])),
+                200
+            );
         } else {
             $options = [
                 'http_code' => 400,
@@ -310,20 +292,10 @@ class WorkspaceHomeController extends Controller
             $event = new LogHomeTabWorkspaceEditEvent($homeTabConfig);
             $this->eventDispatcher->dispatch('log', $event);
 
-            $homeTabDatas = [
-                'configId' => $homeTabConfig->getId(),
-                'locked' => $homeTabConfig->isLocked(),
-                'tabOrder' => $homeTabConfig->getTabOrder(),
-                'type' => $homeTabConfig->getType(),
-                'visible' => $homeTabConfig->isVisible(),
-                'tabId' => $homeTab->getId(),
-                'tabName' => $homeTab->getName(),
-                'tabType' => $homeTab->getType(),
-                'tabIcon' => $homeTab->getIcon(),
-                'color' => $color,
-            ];
-
-            return new JsonResponse($homeTabDatas, 200);
+            return new JsonResponse(
+                $this->serializer->serialize($homeTabConfig, 'json', SerializationContext::create()->setGroups(['api_home_tab'])),
+                200
+            );
         } else {
             $options = [
                 'http_code' => 400,
@@ -356,28 +328,10 @@ class WorkspaceHomeController extends Controller
         $this->checkToolEditionAccess($workspace);
         $homeTab = $homeTabConfig->getHomeTab();
         $this->checkWorkspaceHomeTab($workspace, $homeTab);
-        $details = $homeTabConfig->getDetails();
-        $color = isset($details['color']) ? $details['color'] : null;
-        $htcDatas = [
-            'configId' => $homeTabConfig->getId(),
-            'locked' => $homeTabConfig->isLocked(),
-            'tabOrder' => $homeTabConfig->getTabOrder(),
-            'type' => $homeTabConfig->getType(),
-            'visible' => $homeTabConfig->isVisible(),
-            'tabId' => $homeTab->getId(),
-            'tabName' => $homeTab->getName(),
-            'tabType' => $homeTab->getType(),
-            'tabIcon' => $homeTab->getIcon(),
-            'color' => $color,
-            'details' => $details,
-            'workspaceId' => $workspace->getId(),
-            'workspaceCode' => $workspace->getCode(),
-            'workspaceName' => $workspace->getName(),
-            'workspaceGuid' => $workspace->getGuid(),
-        ];
+        $htcDatas = $this->serializer->serialize($homeTabConfig, 'json', SerializationContext::create()->setGroups(['api_home_tab']));
         $this->homeTabManager->deleteHomeTabConfig($homeTabConfig);
         $this->homeTabManager->deleteHomeTab($homeTab);
-        $event = new LogHomeTabWorkspaceDeleteEvent($workspace, $htcDatas);
+        $event = new LogHomeTabWorkspaceDeleteEvent($workspace, json_decode($htcDatas, true));
         $this->eventDispatcher->dispatch('log', $event);
 
         return new JsonResponse($htcDatas, 200);
@@ -479,31 +433,11 @@ class WorkspaceHomeController extends Controller
             $widgetInstance = $config->getWidgetInstance();
             $widget = $widgetInstance->getWidget();
             $widgetInstanceId = $widgetInstance->getId();
-            $widgetDatas['widgetId'] = $widget->getId();
-            $widgetDatas['widgetName'] = $widget->getName();
-            $widgetDatas['configId'] = $config->getId();
-            $displayWidgetEvent = new DisplayWidgetEvent($widgetInstance);
-            $event = $this->eventDispatcher->dispatch('widget_'.$widget->getName(), $displayWidgetEvent);
-            $widgetDatas['content'] = $event->getContent();
+            $widgetDatas['config'] = $this->serializer->serialize($config, 'json', SerializationContext::create()->setGroups(['api_widget']));
+            $widgetDatas['display'] = $this->serializer->serialize($wdcs[$widgetInstanceId], 'json', SerializationContext::create()->setGroups(['api_widget']));
             $widgetDatas['configurable'] = $widget->isConfigurable();
-            $widgetDatas['locked'] = $config->isLocked();
-            $widgetDatas['visible'] = $config->isVisible();
-            $widgetDatas['type'] = $config->getType();
-            $widgetDatas['instanceId'] = $widgetInstanceId;
-            $widgetDatas['instanceName'] = $widgetInstance->getName();
-            $widgetDatas['instanceIcon'] = $widgetInstance->getIcon();
-            $widgetDatas['displayId'] = $wdcs[$widgetInstanceId]->getId();
-            $row = $wdcs[$widgetInstanceId]->getRow();
-            $column = $wdcs[$widgetInstanceId]->getColumn();
-            $widgetDatas['row'] = $row >= 0 ? $row : null;
-            $widgetDatas['col'] = $column >= 0 ? $column : null;
-            $widgetDatas['sizeY'] = $wdcs[$widgetInstanceId]->getHeight();
-            $widgetDatas['sizeX'] = $wdcs[$widgetInstanceId]->getWidth();
-            $widgetDatas['color'] = $wdcs[$widgetInstanceId]->getColor();
-            $details = $wdcs[$widgetInstanceId]->getDetails();
-            $widgetDatas['textTitleColor'] = isset($details['textTitleColor']) ?
-                $details['textTitleColor'] :
-                null;
+            $event = $this->eventDispatcher->dispatch('widget_'.$widget->getName(), new DisplayWidgetEvent($widgetInstance));
+            $widgetDatas['content'] = $event->getContent();
             $widgets[] = $widgetDatas;
         }
 
@@ -587,23 +521,9 @@ class WorkspaceHomeController extends Controller
             $this->eventDispatcher->dispatch('log', $event);
 
             $widgetDatas = [
-                'widgetId' => $widget->getId(),
-                'widgetName' => $widget->getName(),
-                'configId' => $widgetHomeTabConfig->getId(),
+                'config' => $this->serializer->serialize($widgetHomeTabConfig, 'json', SerializationContext::create()->setGroups(['api_widget'])),
+                'display' => $this->serializer->serialize($widgetDisplayConfig, 'json', SerializationContext::create()->setGroups(['api_widget'])),
                 'configurable' => $widget->isConfigurable(),
-                'locked' => $widgetHomeTabConfig->isLocked(),
-                'visible' => $widgetHomeTabConfig->isVisible(),
-                'type' => $widgetHomeTabConfig->getType(),
-                'instanceId' => $widgetInstance->getId(),
-                'instanceName' => $widgetInstance->getName(),
-                'instanceIcon' => $widgetInstance->getIcon(),
-                'displayId' => $widgetDisplayConfig->getId(),
-                'row' => null,
-                'col' => null,
-                'sizeY' => $widgetDisplayConfig->getHeight(),
-                'sizeX' => $widgetDisplayConfig->getWidth(),
-                'color' => $color,
-                'textTitleColor' => $textTitleColor,
             ];
 
             return new JsonResponse($widgetDatas, 200);
@@ -702,22 +622,9 @@ class WorkspaceHomeController extends Controller
             $this->widgetManager->persistWidgetConfigs($widgetInstance, null, $wdc);
             $event = new LogWidgetWorkspaceEditEvent($widgetInstance, $whtc, $wdc);
             $this->eventDispatcher->dispatch('log', $event);
-
             $widgetDatas = [
-                'widgetId' => $widget->getId(),
-                'widgetName' => $widget->getName(),
-                'instanceId' => $widgetInstance->getId(),
-                'instanceName' => $widgetInstance->getName(),
-                'instanceIcon' => $widgetInstance->getIcon(),
-                'visible' => $visible,
-                'locked' => $locked,
-                'displayId' => $wdc->getId(),
-                'row' => null,
-                'col' => null,
-                'sizeY' => $wdc->getHeight(),
-                'sizeX' => $wdc->getWidth(),
-                'color' => $color,
-                'textTitleColor' => $textTitleColor,
+                'config' => $this->serializer->serialize($whtc, 'json', SerializationContext::create()->setGroups(['api_widget'])),
+                'display' => $this->serializer->serialize($wdc, 'json', SerializationContext::create()->setGroups(['api_widget'])),
             ];
 
             return new JsonResponse($widgetDatas, 200);
@@ -752,38 +659,11 @@ class WorkspaceHomeController extends Controller
     {
         $workspace = $widgetHomeTabConfig->getWorkspace();
         $this->checkToolEditionAccess($workspace);
-        $homeTab = $widgetHomeTabConfig->getHomeTab();
         $widgetInstance = $widgetHomeTabConfig->getWidgetInstance();
-        $widget = $widgetInstance->getWidget();
-        $datas = [
-            'tabId' => $homeTab->getId(),
-            'tabName' => $homeTab->getName(),
-            'tabType' => $homeTab->getType(),
-            'tabIcon' => $homeTab->getIcon(),
-            'widgetId' => $widget->getId(),
-            'widgetName' => $widget->getName(),
-            'widgetIsConfigurable' => $widget->isConfigurable(),
-            'widgetIsExportable' => $widget->isExportable(),
-            'widgetIsDisplayableInWorkspace' => $widget->isDisplayableInWorkspace(),
-            'widgetIsDisplayableInDesktop' => $widget->isDisplayableInDesktop(),
-            'id' => $widgetInstance->getId(),
-            'name' => $widgetInstance->getName(),
-            'icon' => $widgetInstance->getIcon(),
-            'isAdmin' => $widgetInstance->isAdmin(),
-            'isDesktop' => $widgetInstance->isDesktop(),
-            'widgetHomeTabConfigId' => $widgetHomeTabConfig->getId(),
-            'order' => $widgetHomeTabConfig->getWidgetOrder(),
-            'type' => $widgetHomeTabConfig->getType(),
-            'visible' => $widgetHomeTabConfig->isVisible(),
-            'locked' => $widgetHomeTabConfig->isLocked(),
-            'workspaceId' => $workspace->getId(),
-            'workspaceCode' => $workspace->getCode(),
-            'workspaceName' => $workspace->getName(),
-            'workspaceGuid' => $workspace->getGuid(),
-        ];
+        $datas = $this->serializer->serialize($widgetInstance, 'json', SerializationContext::create()->setGroups(['api_widget']));
         $this->homeTabManager->deleteWidgetHomeTabConfig($widgetHomeTabConfig);
         $this->widgetManager->removeInstance($widgetInstance);
-        $event = new LogWidgetWorkspaceDeleteEvent($workspace, $datas);
+        $event = new LogWidgetWorkspaceDeleteEvent($workspace, json_decode($datas, true));
         $this->eventDispatcher->dispatch('log', $event);
 
         return new JsonResponse($datas, 200);
