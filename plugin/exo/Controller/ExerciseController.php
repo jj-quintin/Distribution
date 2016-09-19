@@ -244,37 +244,6 @@ class ExerciseController extends Controller
     }
 
     /**
-     * Delete the Question of the exercise.
-     *
-     * @EXT\Route(
-     *     "/{id}/question/{qid}",
-     *     name="ujm_exercise_question_delete",
-     *     options={"expose"=true}
-     * )
-     * @EXT\Method("DELETE")
-     * @ParamConverter("Exercise", class="UJMExoBundle:Exercise")
-     *
-     * @param Exercise $exercise
-     * @param int      $qid      id of question to delete
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    public function deleteQuestionAction(Exercise $exercise, $qid)
-    {
-        $this->assertHasPermission('ADMINISTRATE', $exercise);
-
-        $em = $this->getDoctrine()->getManager();
-        $question = $em->getRepository('UJMExoBundle:Question')->find($qid);
-        //Temporary : Waiting step manager
-        $sq = $em->getRepository('UJMExoBundle:StepQuestion')
-            ->findStepByExoQuestion($exercise, $question);
-        $em->remove($sq);
-        $em->flush();
-
-        return new JsonResponse($this->get('ujm.exo.exercise_manager')->exportExercise($exercise, false));
-    }
-
-    /**
      * To display the docimology's histograms.
      *
      * @EXT\Route("/docimology/{id}", name="ujm_exercise_docimology", options={"expose"=true})
