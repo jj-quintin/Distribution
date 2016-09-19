@@ -22,7 +22,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use UJM\ExoBundle\Entity\Exercise;
 use UJM\ExoBundle\Entity\Step;
-use UJM\ExoBundle\Manager\SubscriptionManager;
 use UJM\ExoBundle\Services\classes\QTI\QtiRepository;
 use UJM\ExoBundle\Services\classes\QTI\QtiServices;
 
@@ -48,11 +47,6 @@ class ExoImporter extends Importer implements ConfigurationInterface
     private $qtiRepository;
 
     /**
-     * @var SubscriptionManager
-     */
-    private $subscriptionManager;
-
-    /**
      * @var bool
      */
     private $new = true;
@@ -62,24 +56,20 @@ class ExoImporter extends Importer implements ConfigurationInterface
      *     "om"                  = @DI\Inject("claroline.persistence.object_manager"),
      *     "qtiService"          = @DI\Inject("ujm.exo_qti"),
      *     "qtiRepository"       = @DI\Inject("ujm.exo_qti_repository"),
-     *     "subscriptionManager" = @DI\Inject("ujm.exo.subscription_manager")
      * })
      *
      * @param ObjectManager       $om
      * @param QtiServices         $qtiService,
      * @param QtiRepository       $qtiRepository,
-     * @param SubscriptionManager $subscriptionManager
      */
     public function __construct(
         ObjectManager $om,
         QtiServices $qtiService,
-        QtiRepository $qtiRepository,
-        SubscriptionManager $subscriptionManager)
+        QtiRepository $qtiRepository)
     {
         $this->om = $om;
         $this->qtiService = $qtiService;
         $this->qtiRepository = $qtiRepository;
-        $this->subscriptionManager = $subscriptionManager;
     }
 
     public function getConfigTreeBuilder()
@@ -154,7 +144,7 @@ class ExoImporter extends Importer implements ConfigurationInterface
         $rootPath = $this->getRootPath();
         $exoPath = $data['data']['exercise']['path'];
 
-        $newExercise = $this->createExo($data['data']['exercise'], $this->qtiRepository->getQtiUser());
+        $newExercise = $this->createExo($data['data']['exercise']);
 
         if (file_exists($rootPath.'/'.$exoPath)) {
             $this->createQuestion($data['data']['steps'], $newExercise, $rootPath.'/'.$exoPath);
@@ -204,11 +194,10 @@ class ExoImporter extends Importer implements ConfigurationInterface
      * create the exercise.
      *
      * @param array $exercise properties of the exercise
-     * @param User  $user
      *
      * @return Exercise
      */
-    private function createExo(array $exercise, User $user)
+    private function createExo(array $exercise)
     {
         $newExercise = new Exercise();
         $newExercise->setDescription($exercise['description']);
@@ -227,8 +216,6 @@ class ExoImporter extends Importer implements ConfigurationInterface
         $newExercise->setType($exercise['type']);
 
         $this->om->persist($newExercise);
-
-        $this->subscriptionManager->subscribe($newExercise, $user);
 
         $this->om->flush();
 
