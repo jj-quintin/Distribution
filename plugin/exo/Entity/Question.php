@@ -59,11 +59,6 @@ class Question
     /**
      * @ORM\Column(type="boolean")
      */
-    private $locked = false;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
     private $model = false;
 
     /**
@@ -87,18 +82,19 @@ class Question
     private $user;
 
     /**
-     * @ORM\OneToMany(
-     *     targetEntity="Hint",
-     *     mappedBy="question",
-     *     cascade={"remove", "persist"}
-     * )
+     * @ORM\OneToMany(targetEntity="Hint", mappedBy="question", cascade={"remove", "persist"})
      */
     private $hints;
 
     /**
-     * @ORM\OneToMany(targetEntity="ObjectQuestion", mappedBy="question", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="QuestionObject", mappedBy="question", orphanRemoval=true)
      */
     private $objects;
+
+    /**
+     * @ORM\OneToMany(targetEntity="QuestionResource", mappedBy="question", orphanRemoval=true)
+     */
+    private $resources;
 
     /**
      * Note: used for joins only., orphanRemoval=true.
@@ -111,6 +107,7 @@ class Question
     {
         $this->hints = new ArrayCollection();
         $this->objects = new ArrayCollection();
+        $this->resources = new ArrayCollection();
         $this->stepQuestions = new ArrayCollection();
         $this->dateCreate = new \DateTime();
     }
@@ -189,12 +186,18 @@ class Question
         return $this->invite;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getObjects()
     {
         return $this->objects;
     }
 
-    public function addObject(ObjectQuestion $object)
+    /**
+     * @param QuestionObject $object
+     */
+    public function addObject(QuestionObject $object)
     {
         if (!$this->objects->contains($object)) {
             $this->objects->add($object);
@@ -202,11 +205,44 @@ class Question
         }
     }
 
-    public function removeObject(ObjectQuestion $object)
+    /**
+     * @param QuestionObject $object
+     */
+    public function removeObject(QuestionObject $object)
     {
         if ($this->objects->contains($object)) {
             $this->objects->removeElement($object);
             $object->setQuestion(null);
+        }
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getResources()
+    {
+        return $this->resources;
+    }
+
+    /**
+     * @param QuestionResource $resource
+     */
+    public function addResource(QuestionResource $resource)
+    {
+        if (!$this->resources->contains($resource)) {
+            $this->resources->add($resource);
+            $resource->setQuestion($this);
+        }
+    }
+
+    /**
+     * @param QuestionResource $resource
+     */
+    public function removeResource(QuestionResource $resource)
+    {
+        if ($this->resources->contains($resource)) {
+            $this->resources->removeElement($resource);
+            $resource->setQuestion(null);
         }
     }
 
@@ -256,22 +292,6 @@ class Question
     public function getDateModify()
     {
         return $this->dateModify;
-    }
-
-    /**
-     * @param bool $locked
-     */
-    public function setLocked($locked)
-    {
-        $this->locked = $locked;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getLocked()
-    {
-        return $this->locked;
     }
 
     /**

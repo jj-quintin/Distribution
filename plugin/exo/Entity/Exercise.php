@@ -173,7 +173,7 @@ class Exercise extends AbstractResource
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Step", mappedBy="exercise", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Step", mappedBy="exercise", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"order" = "ASC"})
      */
     private $steps;
