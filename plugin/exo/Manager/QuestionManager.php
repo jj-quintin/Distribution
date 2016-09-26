@@ -10,9 +10,11 @@ use UJM\ExoBundle\Entity\Exercise;
 use UJM\ExoBundle\Entity\Hint;
 use UJM\ExoBundle\Entity\Question;
 use UJM\ExoBundle\Entity\Response;
+use UJM\ExoBundle\Serializer\Question\QuestionSerializer;
 use UJM\ExoBundle\Transfer\Json\QuestionHandlerCollector;
 use UJM\ExoBundle\Transfer\Json\ValidationException;
 use UJM\ExoBundle\Transfer\Json\Validator;
+use UJM\ExoBundle\Validator\JsonSchema\Question\QuestionValidator;
 
 /**
  * @DI\Service("ujm.exo.question_manager")
@@ -21,20 +23,45 @@ class QuestionManager
 {
     private $router;
     private $om;
-    private $validator;
-    private $handlerCollector;
     private $rm;
 
     /**
+     * @var QuestionValidator
+     */
+    private $validator;
+
+    /**
+     * @var QuestionSerializer
+     */
+    private $serializer;
+
+    /**
+     * @var Validator
+     * @deprecated use $validator instead
+     */
+    private $oldValidator;
+
+    /**
+     * @var QuestionHandlerCollector
+     * @deprecated
+     */
+    private $handlerCollector;
+
+    /**
      * @var HintManager
+     * @deprecated it's no longer needed by the class
      */
     private $hintManager;
 
     /**
+     * QuestionManager constructor.
+     *
      * @DI\InjectParams({
      *     "router"       = @DI\Inject("router"),
      *     "om"           = @DI\Inject("claroline.persistence.object_manager"),
-     *     "validator"    = @DI\Inject("ujm.exo.json_validator"),
+     *     "validator"    = @DI\Inject("ujm_exo.validator.question"),
+     *     "serializer"   = @DI\Inject("ujm_exo.serializer.question"),
+     *     "oldValidator" = @DI\Inject("ujm.exo.json_validator"),
      *     "collector"    = @DI\Inject("ujm.exo.question_handler_collector"),
      *     "rm"           = @DI\Inject("claroline.manager.resource_manager"),
      *     "hintManager"  = @DI\Inject("ujm.exo.hint_manager"),
@@ -42,7 +69,9 @@ class QuestionManager
      *
      * @param UrlGeneratorInterface    $router
      * @param ObjectManager            $om
-     * @param Validator                $validator
+     * @param Validator                $oldValidator
+     * @param QuestionValidator        $validator
+     * @param QuestionSerializer       $serializer
      * @param QuestionHandlerCollector $collector
      * @param ResourceManager          $rm
      * @param HintManager              $hintManager
@@ -50,21 +79,82 @@ class QuestionManager
     public function __construct(
         UrlGeneratorInterface $router,
         ObjectManager $om,
-        Validator $validator,
+        Validator $oldValidator,
+        QuestionValidator $validator,
+        QuestionSerializer $serializer,
         QuestionHandlerCollector $collector,
         ResourceManager $rm,
         HintManager $hintManager
     ) {
         $this->router = $router;
         $this->om = $om;
+        $this->oldValidator = $oldValidator;
         $this->validator = $validator;
+        $this->serializer = $serializer;
         $this->handlerCollector = $collector;
         $this->rm = $rm;
         $this->hintManager = $hintManager;
     }
 
     /**
+     * Validates and creates a new Question from raw data.
+     *
+     * @param \stdClass $data
+     *
+     * @return Question
+     *
+     * @throws ValidationException
+     */
+    public function create(\stdClass $data)
+    {
+        return $this->update(new Question(), $data);
+    }
+
+    /**
+     * Validates and updates a Exercise entity with raw data.
+     *
+     * @param Question  $question
+     * @param \stdClass $data
+     *
+     * @return Exercise
+     *
+     * @throws ValidationException
+     */
+    public function update(Question $question, \stdClass $data)
+    {
+        // Validate received data
+        $errors = $this->validator->validate($data);
+        if (count($errors) > 0) {
+            throw new ValidationException('Exercise is not valid', $errors);
+        }
+
+        // Update Exercise with new data
+        $this->serializer->deserialize($data, ['entity' => $question]);
+
+        // Save to DB
+        $this->om->persist($question);
+        $this->om->flush();
+
+        return $question;
+    }
+
+    /**
+     * Exports an Question.
+     *
+     * @param Question $question
+     * @param array    $options
+     *
+     * @return \stdClass
+     */
+    public function export(Question $question, array $options = [])
+    {
+        return $this->serializer->serialize($question, $options);
+    }
+
+    /**
      * Imports a question in a JSON-decoded format.
+     *
+     * @deprecated use create() instead
      *
      * @param \stdClass $data
      *
@@ -73,7 +163,7 @@ class QuestionManager
      */
     public function importQuestion(\stdClass $data)
     {
-        if (count($errors = $this->validator->validateQuestion($data)) > 0) {
+        if (count($errors = $this->oldValidator->validateQuestion($data)) > 0) {
             throw new ValidationException('Question is not valid', $errors);
         }
 
@@ -104,6 +194,8 @@ class QuestionManager
 
     /**
      * Exports a question in a JSON-encodable format.
+     *
+     * @deprecated use export() instead
      *
      * @param Question $question
      * @param bool     $withSolution

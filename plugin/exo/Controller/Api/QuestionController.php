@@ -7,6 +7,8 @@ use Claroline\CoreBundle\Persistence\ObjectManager;
 use JMS\DiExtraBundle\Annotation as DI;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as EXT;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use UJM\ExoBundle\Entity\Question;
 
 /**
  * Question Controller.
@@ -38,7 +40,8 @@ class QuestionController
     }
 
     /**
-     * List all the Questions of the current User (its owns and the ones that are shared with him)
+     * List all the Questions of the current User
+     * (its owns and the ones that are shared with him).
      *
      * @EXT\Route("/{id}/attempts", name="question_index")
      * @EXT\Method("POST")
@@ -50,5 +53,20 @@ class QuestionController
     {
 
         return new JsonResponse();
+    }
+
+    public function createAction(Request $request)
+    {
+
+    }
+
+    public function updateAction(Question $question, Request $request)
+    {
+
+    }
+
+    public function deleteAction(Question $question)
+    {
+
     }
 }
