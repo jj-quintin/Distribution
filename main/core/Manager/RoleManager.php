@@ -199,10 +199,14 @@ class RoleManager
      *
      * @throws \Exception
      */
-    public function setRoleToRoleSubject(AbstractRoleSubject $ars, $roleName)
+    public function setRoleToRoleSubject(AbstractRoleSubject $ars, $roleName, $validate = true)
     {
         $role = $this->roleRepo->findOneBy(['name' => $roleName]);
-        $validated = $this->validateRoleInsert($ars, $role);
+        if ($validate) {
+            $validated = $this->validateRoleInsert($ars, $role);
+        } else {
+            $validated = true;
+        }
 
         if (!$validated) {
             throw new Exception\AddRoleException();

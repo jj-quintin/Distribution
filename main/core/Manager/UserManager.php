@@ -45,7 +45,7 @@ class UserManager
 {
     use LoggableTrait;
 
-    const MAX_USER_BATCH_SIZE = 20;
+    const MAX_USER_BATCH_SIZE = 100;
     const MAX_EDIT_BATCH_SIZE = 100;
 
     private $container;
@@ -147,7 +147,8 @@ class UserManager
         $model = null,
         $publicUrl = null,
         $organizations = [],
-        $forcePersonalWorkspace = null
+        $forcePersonalWorkspace = null,
+        $forceRoleValidation = true
     ) {
         $additionnalRoles = [];
 
@@ -168,7 +169,7 @@ class UserManager
         $publicUrl ? $user->setPublicUrl($publicUrl) : $user->setPublicUrl($this->generatePublicUrl($user));
         $this->toolManager->addRequiredToolsToUser($user, 0);
         $this->toolManager->addRequiredToolsToUser($user, 1);
-        $this->roleManager->setRoleToRoleSubject($user, PlatformRoles::USER);
+        $this->roleManager->setRoleToRoleSubject($user, PlatformRoles::USER, $forceRoleValidation);
         $this->objectManager->persist($user);
         $this->strictEventDispatcher->dispatch('log', 'Log\LogUserCreate', [$user]);
         $this->roleManager->createUserRole($user);
@@ -539,7 +540,8 @@ class UserManager
                     $model,
                     $username.uniqid(),
                     $organizations,
-                    $hasPersonalWorkspace
+                    $hasPersonalWorkspace,
+                    false
                 );
             }
 
