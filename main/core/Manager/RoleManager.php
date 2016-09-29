@@ -175,7 +175,7 @@ class RoleManager
             $role->setType(Role::USER_ROLE);
             $this->om->persist($role);
         }
-        $this->associateRole($user, $role, false, false);
+        $this->setRoleToRoleSubject($role, $user, false);
         $this->om->endFlushSuite();
 
         return $role;
@@ -202,6 +202,7 @@ class RoleManager
     public function setRoleToRoleSubject(AbstractRoleSubject $ars, $roleName, $validate = true)
     {
         $role = $this->roleRepo->findOneBy(['name' => $roleName]);
+
         if ($validate) {
             $validated = $this->validateRoleInsert($ars, $role);
         } else {
