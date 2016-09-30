@@ -168,8 +168,8 @@ class UserManager
         $publicUrl ? $user->setPublicUrl($publicUrl) : $user->setPublicUrl($this->generatePublicUrl($user));
         $this->toolManager->addRequiredToolsToUser($user, 0);
         $this->toolManager->addRequiredToolsToUser($user, 1);
-        $this->roleManager->setRoleToRoleSubject($user, PlatformRoles::USER, $forceRoleValidation);
-        $this->strictEventDispatcher->dispatch('log', 'Log\LogUserCreate', [$user]);
+        $roleUser = $this->roleManager->getRolesByName(PlatformRoles::USER);
+        $user->addRole($role);
         $this->roleManager->createUserRole($user);
 
         foreach ($additionnalRoles as $role) {
@@ -192,8 +192,6 @@ class UserManager
             }
         }
 
-        $this->strictEventDispatcher->dispatch('user_created_event', 'UserCreated', ['user' => $user]);
-
         if ($forcePersonalWorkspace !== null) {
             if ($forcePersonalWorkspace) {
                 $this->setPersonalWorkspace($user, $model);
@@ -205,6 +203,8 @@ class UserManager
         }
 
         $this->objectManager->persist($user);
+        $this->strictEventDispatcher->dispatch('user_created_event', 'UserCreated', ['user' => $user]);
+        $this->strictEventDispatcher->dispatch('log', 'Log\LogUserCreate', [$user]);
         $this->objectManager->endFlushSuite();
 
         return $user;
