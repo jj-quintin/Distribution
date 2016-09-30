@@ -169,7 +169,7 @@ class UserManager
         $this->toolManager->addRequiredToolsToUser($user, 0);
         $this->toolManager->addRequiredToolsToUser($user, 1);
         $this->roleManager->setRoleToRoleSubject($user, PlatformRoles::USER, $forceRoleValidation);
-        $this->strictEventDispatcher->dispatch('log', 'Log\LogUserCreate', [$user]); /*
+        $this->strictEventDispatcher->dispatch('log', 'Log\LogUserCreate', [$user]);
         $this->roleManager->createUserRole($user);
 
         foreach ($additionnalRoles as $role) {
@@ -204,7 +204,7 @@ class UserManager
             }
         }
 
-        $this->objectManager->persist($user);*/
+        $this->objectManager->persist($user);
         $this->objectManager->endFlushSuite();
 
         return $user;
