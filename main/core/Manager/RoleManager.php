@@ -175,7 +175,8 @@ class RoleManager
             $role->setType(Role::USER_ROLE);
             $this->om->persist($role);
         }
-        $this->setRoleToRoleSubject($role, $user, false);
+
+        $user->addRole($role);
         $this->om->endFlushSuite();
 
         return $role;
