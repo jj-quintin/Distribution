@@ -19,6 +19,7 @@ use Claroline\CoreBundle\Persistence\ObjectManager;
 use JMS\DiExtraBundle\Annotation\Inject;
 use JMS\DiExtraBundle\Annotation\InjectParams;
 use JMS\DiExtraBundle\Annotation\Service;
+use Symfony\Component\HttpFoundation\File\File as SfFile;
 
 /**
  * @service("claroline.library.testing.persister")
@@ -85,7 +86,7 @@ class Persister
         $workspace->setName($name);
         $workspace->setCode($name);
         $workspace->setCreator($creator);
-        $template = new \Symfony\Component\HttpFoundation\File\File($this->container->getParameter('claroline.param.default_template'));
+        $template = new SfFile($this->container->getParameter('claroline.param.default_template'));
 
         //optimize this later
         $this->container->get('claroline.manager.workspace_manager')->create($workspace, $template);

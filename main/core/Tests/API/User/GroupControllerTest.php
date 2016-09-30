@@ -289,9 +289,9 @@ class GroupControllerTest extends TransactionalTestCase
     {
         //initialization
         $organization = $this->persister->organization('organization');
-        $groupOrga = $this->createGroupOrga($organization);
+        $this->createGroupOrga($organization);
         $adminOrga = $this->createAdminOrga($organization);
-        $groupBase = $this->persister->group('groupBase');
+        $this->persister->group('groupBase');
         $john = $this->persister->user('john');
         $admin = $this->createAdmin();
 
@@ -338,7 +338,7 @@ class GroupControllerTest extends TransactionalTestCase
     //@url: /api/group/searchable/fields.{_format}
     public function testGetGroupSearchableFieldsAction()
     {
-        $admin = $this->createAdmin();
+        $this->createAdmin();
         $this->persister->flush();
         $this->client->request('GET', '/api/group/searchable/fields.json');
         $data = $this->client->getResponse()->getContent();

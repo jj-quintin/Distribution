@@ -168,8 +168,8 @@ class UserManager
         $publicUrl ? $user->setPublicUrl($publicUrl) : $user->setPublicUrl($this->generatePublicUrl($user));
         $this->toolManager->addRequiredToolsToUser($user, 0);
         $this->toolManager->addRequiredToolsToUser($user, 1);
-        $roleUser = $this->roleManager->getRolesByName(PlatformRoles::USER);
-        $user->addRole($role);
+        $roleUser = $this->roleManager->getRoleByName(PlatformRoles::USER);
+        $user->addRole($roleUser);
         $this->roleManager->createUserRole($user);
 
         foreach ($additionnalRoles as $role) {
