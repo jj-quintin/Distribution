@@ -67,7 +67,7 @@ Choose at least one type of document: Choisissez au moins un type de document
 Choose at least one type of ranking: Choisissez au moins un type de notation
 Choose current phase: Choisissez la phase en cours :
 Close unterminated drops: Valider les copies non terminées
-Closed collecticiel: Ce collecticiel est fermé.
+Closed collecticiel: Ce collecticiel est fermé
 Closed: fermé
 Comment Auto: Commenter à la volée
 Comment evaluation: Commentaire
@@ -128,14 +128,14 @@ Date hour: Document déposé en date du
 Dated: Document déposé en date du
 Deal Pending : opération en attente
 Deals Pending : opérations en attente
-default_scale_very_good: Très bien
-default_scale_satisfying: Satisfaisant
-default_scale_insufficient: Insuffisant
+default_scale_very_good: TB
+default_scale_satisfying: S
+default_scale_insufficient: I
 default_criteria_comment: Commentaire
 default sort: Tri par défaut
 Delete a copy: Supprimer un document
 Delete a criterion: Supprimer un critère
-Delete a document: Suppression dun document
+Delete a document: Suppression d'un document
 Delete copy: Supprimer le document
 Delete:  Supprimer
 Deleted drop: Document supprimé
@@ -192,7 +192,7 @@ Evaluation document modal: Communication de l'évaluation aux étudiants
 Evaluation finished: L'évaluation est terminée
 Evaluation for documents : Les documents du collecticiel font l'objet d''une évaluation ?
 Evaluation not started: L'évaluation n'a pas démarré
-Evaluation not started: L'évaluation n'a pas encore commencé.
+Evaluation not started: L'évaluation n'a pas encore commencé
 Evaluation submit student: Transmettre une demande d'évaluation
 Evaluation transmission: Transmettre une demande d'évaluation
 Evaluation type : Type d'évaluation
@@ -277,7 +277,7 @@ Made by: "Rendue par"
 Make my copy: Collecticiel - Vue Apprenant
 manualPlanning: Manuellement
 Maximum notation : Maximum (note sur) :
-Minimum score to pass: Note minimum pour réussir lévaluation (sur 20)
+Minimum score to pass: Note minimum pour réussir l'évaluation (sur 20)
 Modify add or delete criteria will affect this corrections if you recalculate the note on it.: Modifier, ajouter ou supprimer des critères n'affectera que les nouvelles corrections.  Pour mettre à jour les anciennes corrections, vous devrez recalculer les notes de celles ci.
 Must be after end allow drop: Doit être postérieur à la fin du dépôt
 Must be after start allow drop: Doit être postérieur au début du dépôt
@@ -298,7 +298,7 @@ Need to be the author: Vous devez être l'auteur de la correction pour effectuer
 Next: Suivant
 Nickname: Identifiant
 No action allowed : Aucune action possible
-No copy waiting for correction: À ce jour, aucune demande ne vous a été adressée.
+No copy waiting for correction: À ce jour, aucune demande ne vous a été adressée
 No copy was made: Aucun document n'a été rendue
 No correction: Aucune correction.
 no document added yet: Aucun document ajouté pour l'instant
@@ -359,7 +359,7 @@ People that have a copy in this dropzone: Personnes ayant déposé un document d
 People will not be able to drop anymore: Fermeture du collecticiel
 Picture: Image de profil
 Planification instruction: L'ouverture du collecticiel peut se réaliser de manière manuelle ou en fonction des dates	de début (ouverture du collecticiel) et de fin (fermeture).
-Planification peer review instruction: Elle se divise en plusieurs étapes: l'ouverture de l'évaluation en autorisant le dépôt, début de l'évaluation par les pairs qui clôture le dépôt et la fin de l'évaluation.
+Planification peer review instruction: 
 Planning: Ouverture
 Please comment: Merci de laisser un commentaire
 Please complete text : Veuillez renseigner le champ "Texte"
@@ -381,7 +381,7 @@ Reason of reporting: Raison du signalement
 Recalculate all grade: Recalculer toutes les notes
 Recalculate the score: Recalculer la note
 recalculate_helper: Utile si vous avez supprimé des critères de correction alors que des gens avaient déjà commencé à corriger. Cela adaptera la note. Si vous avez ajouté de nouveaux critères, la note pour ce critère sera de 0 par défaut.
-Recall instructions: Rappel des consignes
+Recall instructions: Consignes
 Relevant documents: Documents concernés
 Remove report: Retirer le signalement
 Report comment: Expliquez la raison de votre signalement
@@ -407,7 +407,7 @@ Return to copies: Retour aux travaux
 Return to corrections: Retour aux corrections
 Return: Retour
 revalidate: Revalider
-Review : Evaluation
+Review : Évaluation
 Review on : Évaluation apportée sur
 Review state : Etat de lévaluation
 
@@ -423,7 +423,7 @@ See collecticiel: Accéder au collecticiel
 See comments : Accéder aux commentaires
 See copies: Accéder aux travaux
 See copy: Voir le document
-See correction: 'Voir la correction'
+See correction: Voir la correction
 See corrections: Voir les corrections
 See Corrections: Voir les corrections
 See document: Accéder au document
@@ -439,7 +439,7 @@ sort by reported: Signalées
 Sort by user: Tri par utilisateur
 Sorted by date with reported drops first: Tri par date avec les travaux signalés en premier.
 Spaces collecticiel: Espaces collecticiel
-Standard evaluation: Les enseignants corrigent les travaux.
+Standard evaluation: Les enseignants corrigent les travaux
 Start %date%: commence le %date%
 Start allow drop: Ouverture
 Start evaluation: Commencer l'évaluation
@@ -460,10 +460,10 @@ text_placeholder: Titre du document
 text_type: Texte
 text: Rédiger un texte
 The collecticiel has been successfully saved: Le collecticiel a été correctement sauvegardé
-The comment field is required please let a comment: Le champ commentaire est requis.
+The comment field is required please let a comment: Le champ commentaire est requis
 The drop was deleted by administator: Le document a été supprimé par un administrateur
-The evaluation has been successfully saved: L'évaluation a été correctement sauvegardée.
-The peer review is not enabled: L'évaluation par les pairs n'est pas activée.
+The evaluation has been successfully saved: L'évaluation a été correctement sauvegardée
+The peer review is not enabled: L'évaluation par les pairs n'est pas activée
 There are no evaluation criterion: 'Aucun critère d''évaluation'
 There are only nb days before the beginning of the peer review: one: Plus qu'un jour avant le début de l'évaluation par les pairs|some: Plus que %count% jours avant le début de l'évaluation par les pairs	 la note pour ce critère sera de 0 par défaut.
 There are only nb days before the end of the peer review: one: Plus qu'un jour avant la fin de l'évaluation par les pairs|some: Plus que %count% jours avant la fin de l'évaluation par les pairs
