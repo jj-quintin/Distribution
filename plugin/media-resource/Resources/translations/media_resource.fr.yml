@@ -5,7 +5,7 @@ accent_primary: Accent primaire
 accent_secondary: Accent secondaire
 accent_weak_vowel: Voyelle faible
 accent_no_accent: Texte normal
-alert_only_one_region_left: Il n'y a qu'un seul segment. Vous ne pouvez pas la supprimer.
+alert_only_one_region_left: Il n'y a qu'un seul segment. Vous ne pouvez pas le supprimer.
 annotation_panel_title: Annotations
 
 # b
@@ -40,7 +40,7 @@ help_modal_choice_tab_label: Choix du segment
 help_modal_help_tab_label: Aide disponible pour le segment
 
 # i
-innova_media_resource: Ecoute Active Enrichie
+innova_media_resource: Écoute active enrichie
 identified_region_helps: Ci-dessous sont affichées les aides disponibles qui correspondent aux problèmes identifiés
 
 # l
@@ -53,7 +53,7 @@ label_play_mode_scripted_active: Scénarisé actif
 #m
 move_backward: Aller au marqueur précédent
 move_forward: Aller au marqueur suivant
-media_resource_save_regions: Sauvegarder les segments et leur configuration pour le ressource
+media_resource_save_regions: Sauvegarder les segments et leur configuration pour la ressource
 media_resource_options_explain: Au moins un type de vue doit être actif
 marker_drag_title: Drag & Drop
 media_resource_save: Sauvegarder
