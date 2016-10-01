@@ -212,9 +212,9 @@ creation: Création
 creation_date: Date de création
 creator: Créateur
 csv_export: Export csv
-csv_select: Sélectionnez un fichier csv:
+csv_select: Sélectionnez un fichier csv :
 csv_format_info: Informations sur le format du fichier csv
-csv_format_user_list: Format: liste des noms d''utilisateur séparés par un retour à la ligne.
+csv_format_user_list: Format : liste des noms d''utilisateur séparés par un retour à la ligne.
 csv_users_import_infos: Informations sur le format du fichier csv
 csv_users_import_infos_format: Format
 csv_users_import_infos_format_a: Les données d'un utilisateur doivent être définies sur une ligne et séparées par un point virgule.
@@ -231,7 +231,7 @@ cut: Couper
 dashboard: Tableau de bord
 data_col: Colonne des données
 database: Base de données
-database_connection_failed: La connexion à la base de données a échoué.
+database_connection_failed: La connexion à la base de données a échoué
 date: Date
 date_agenda_display_format_for_form: dd-MM-yyyy
 date_form_datepicker_format: dd/mm/yyyy
@@ -329,10 +329,10 @@ edit_public_profile_preferences_success: 'Préférences de votre profil public m
 edit_rights_success: 'Modification des droits effectuée avec succès.'
 edit_root_directory_icon: 'Modifier l''icône du répertoire racine'
 edit_security_token: 'Modification du jeton d''authentification'
-edit_your_profile_error: 'Une erreur est survenue pendant la modification de votre profil.'
-edit_your_profile_success: 'Modification de votre profil effectuée avec succès.'
+edit_your_profile_error: 'Une erreur est survenue pendant la modification de votre profil'
+edit_your_profile_success: 'Modification de votre profil effectuée avec succès'
 editable: Modifiable
-editable_facet_form_explanation: 'Le champ "Modifiable" permet de spécifier si l''élément doit être modifiable ou non par l''utilisateur.'
+editable_facet_form_explanation: 'Le champ "Modifiable" permet de spécifier si l''élément doit être modifiable ou non par l''utilisateur'
 email: 'Courriel'
 email_found_at: 'Le courriel %email% a été trouvé aux lignes %lines%'
 empty_file: 'Fichier vide'
@@ -378,17 +378,17 @@ form_role: Rôle
 friend_platform: 'Plateformes amies'
 from: Depuis
 from_message: De
-fullscreen_text_editor: 'Vous pouvez utiliser la version plein écran de l''éditeur afin d''y inclure du HTML.'
+fullscreen_text_editor: 'Vous pouvez utiliser la version plein écran de l''éditeur afin d''y inclure du HTML'
 general: Général
 general_parameters: 'Paramètres généraux'
 general_parameters_portfolio_url_help: 'commence par http://'
-general_parameters_updated_success: 'Paramètres généraux modifiés avec succès.'
-general_tab_form_explanation: 'Ce formulaire vous permet de spécifier les informations qui sont vues par rôle dans le profil public.'
+general_parameters_updated_success: 'Paramètres généraux modifiés avec succès'
+general_tab_form_explanation: 'Ce formulaire vous permet de spécifier les informations qui sont vues par rôle dans le profil public'
 generate_token: 'Générer un token aléatoire'
 generate_url: 'Inscription publique'
 generate_url_subscription: 'Inscription à l''espace d''activités par un utilisateur'
 generate_url_subscription_anonyme: 'Inscription à l''espace d''activités par un anonyme'
-generate_url_subscription_fail: Vous devez d'abord cocher la case de l'inscription publique avant de pouvoir voir l'url.
+generate_url_subscription_fail: Vous devez d'abord cocher la case de l'inscription publique avant de pouvoir voir l'url
 get_mail_notifications: Recevoir une copie des messages sur %adress%.
 google_tag_validation: Balise HTML de validation Google
 grant_access: Donner l'accès
@@ -398,8 +398,8 @@ group: Groupe
 group_configuration: 'Configuration du groupe'
 group_creation: 'Création d''un groupe'
 group_parameter: 'Paramètres du groupe'
-group_invalid: 'Le groupe %group% n''est pas valide à la ligne %line%.'
-organization_invalid: 'L''organization %organization% n''est pas valide à la ligne %line%.'
+group_invalid: 'Le groupe %group% n''est pas valide à la ligne %line%'
+organization_invalid: 'L''organization %organization% n''est pas valide à la ligne %line%'
 groups: Groupes
 groups_list: 'Liste des groupes'
 groups_per_page: 'Groupes par page'
@@ -424,14 +424,14 @@ height: Hauteur
 help_url: URL de l'aide
 hide: Cacher
 hide_breadcrumb: Cacher le fil d'Ariane
-hide_tools_menu: Cacher le menu d'outils (sauf pour les gestionnaires).
+hide_tools_menu: Cacher le menu d'outils (sauf pour les gestionnaires)
 history: Historique
 home: Accueil
 home_lock: Verrouillage du bureau
 home_manager: Gestionnaire de l'accueil
 home_parameters: Paramètres de l'accueil
 home_tab: Onglet
-home_tab_bookmark_confirm_message: Cet onglet sera disponible sur votre bureau.
+home_tab_bookmark_confirm_message: Cet onglet sera disponible sur votre bureau
 home_tab_bookmark_confirm_title: Épingler cet onglet au bureau
 home_tab_bookmark_delete_confirm_message: Voulez-vous vraiment retirer cet onglet de votre bureau ?
 home_tab_bookmark_delete_confirm_title: Retrait de l'onglet
@@ -462,7 +462,7 @@ indexing: Référencement
 individual: Individuel
 informations: Informations
 infos_sending_acceptance: 'Acceptation d''envoi d''informations'
-infos_sending_bar_msg: 'Cliquez sur cette barre pour plus d''informations.'
+infos_sending_bar_msg: 'Cliquez sur cette barre pour plus d''informations'
 infos_sending_has_not_been_accepted: 'L''envoi d''informations n''a pas été accepté'
 initialize: Initialiser
 inscription_mail: 'Courriel d''inscription'
@@ -491,14 +491,14 @@ is_mail_displayed: 'Afficher le courriel ?'
 is_not_writable: 'n''est pas accessible en écriture'
 is_not_writable_recursive: 'et ses sous dossiers ne sont pas accessibles en écriture.'
 jqplot_date_output_format: '%d-%m-%Y'
-keep_me_logged_in: 'Se souvenir de moi'
+keep_me_logged_in: 'Rester connecté(e)'
 language: Langue
 language_select: 'Sélectionnez une langue'
 lastName: Nom
 last_30_days_activity: 'Activités des 30 derniers jours'
 last_action: '{1} Dernière action|[1,Inf] %logAmount% dernières actions'
 last_attempt_date: 'Date de la dernière tentative'
-last_manager_error_message: 'Vous ne pouvez pas retirer tous les gestionnaires.'
+last_manager_error_message: 'Vous ne pouvez pas retirer tous les gestionnaires'
 last_modification: Dernière modification
 last_name: Nom
 layout: Layout
@@ -506,7 +506,7 @@ learning_outcomes: 'Référentiel de compétences'
 learning_outcomes_creation: 'Création d''un référentiel de compétences'
 learning_place: 'Lieu d''apprentissage'
 learning_profil: 'Profil d''apprentissage'
-leave_this_page: 'Si vous quittez cette page, vous risquez de perdre vos modifications.'
+leave_this_page: 'Si vous quittez cette page, vous risquez de perdre vos modifications'
 left: Gauche
 license: Licence
 limit: Limite
@@ -525,18 +525,18 @@ locked: Verrouillé
 login: Connexion
 login_failure: 'La connexion a échoué. Vérifiez que votre nom d''utilisateur et votre mot de passe sont corrects.'
 logout: Déconnexion
-logs: suivi
+logs: Suivi
 logs_error_location: 'En cas d''erreur, les logs se trouvent dans le dossier app/log/update-xxx.log.'
-mail: Mail
-mail_click: 'Cliquez sur ce lien pour réinitialiser votre mot de passe.'
-mail_config_problem: 'Veuillez contacter l''administrateur pour réinitialiser votre mot de passe.'
+mail: Courriel
+mail_click: 'Cliquez sur ce lien pour réinitialiser votre mot de passe'
+mail_config_problem: 'Veuillez contacter l''administrateur pour réinitialiser votre mot de passe'
 mail_invalid: 'Le format de votre courriel n''est pas valide'
-mail_layout: 'Mise en page des courriels.'
-mail_layout_message_override: 'Vous pouvez redéfinir ici la mise en forme des courriels envoyés par la plateforme.'
+mail_layout: 'Mise en page des courriels'
+mail_layout_message_override: 'Vous pouvez redéfinir ici la mise en forme des courriels envoyés par la plateforme'
 mail_login: 'Cliquez sur le lien'
 mail_message: 'Vous avez demandé la réinitialisation de votre mot de passe. Cliquez sur lien ci-dessous pour le réinitialiser.</br>Si vous n''êtes pas à l''origine de cette action, veuillez ignorer ce message.'
-mail_not_available: 'La fonction d''envoi de courriel n''est pas disponible.'
-mail_not_exist: 'Ce courriel n''existe pas '
+mail_not_available: 'La fonction d''envoi de courriel n''est pas disponible'
+mail_not_exist: 'Ce courriel n''existe pas'
 mail_sent: 'Un courriel vient de vous être envoyé. Vérifiez votre dossier "pourriels" au cas où celui-ci n''apparaîtrait pas dans votre boîte de réception.'
 maintenance: Maintenance
 maintenance_message_edit_success: Le message de maintenance a bien été modifié
@@ -573,7 +573,7 @@ messages_received_removed: 'Messages reçus supprimés'
 messages_removed: 'Messages supprimés'
 messages_sent: 'Messages envoyés'
 messages_sent_removed: 'Messages envoyés supprimés'
-meta_tag_paste: 'Collez ici la balise meta fournie par Google Webmaster.'
+meta_tag_paste: 'Collez ici la balise meta fournie par Google Webmaster'
 method_of_work: Modalités de travail
 misc: Divers
 missing_%content%: 'La variable %content% est manquante pour la langue "%language%".'
@@ -613,38 +613,38 @@ name_required: 'Nom requis'
 new: Nouveau
 new_folder_in_current_ws: 'Nouveau répertoire dans l''espace d''activité courant'
 new_message: 'Nouveau message'
-new_message_alert: 'Vous avez %count% nouveaux message(s).'
+new_message_alert: 'Vous avez %count% nouveaux message(s)'
 new_password: 'Nouveau mot de passe'
-new_role_message: 'Vous venez de recevoir le role %name%.'
-new_role_message_object: 'Vos permissions sur la plateforme ont changé.'
+new_role_message: 'Vous venez de recevoir le role %name%'
+new_role_message_object: 'Vos permissions sur la plateforme ont changé'
 next: Suivant
 'no': Non
-no_action_found: 'Aucune action trouvée.'
-no_activity_in_workspace: 'Cet espace ne contient actuellement aucune activité.'
+no_action_found: 'Aucune action trouvée'
+no_activity_in_workspace: 'Cet espace ne contient actuellement aucune activité'
 no_category: 'Il n''y a aucune catégorie'
 no_contact: 'Aucun contact'
-no_email: 'Ce courriel ne correspond pas à un utilisateur inscrit.'
+no_email: 'Ce courriel ne correspond pas à un utilisateur inscrit'
 no_filter: 'Aucun filtre'
 no_group: 'Aucun groupe'
 no_home_tab: 'Il n''y a aucun onglet'
 no_learning_outcomes: 'Aucun référentiel de compétences'
 no_message: 'Aucun message'
 no_model: 'Aucun modèle'
-no_resources_in_workspace: 'Cet espace ne contient actuellement aucune ressource.'
-no_role_selected_message: 'Aucun rôle sélectionné.'
-no_search_results: 'Votre recherche n''a retourné aucun résultat.'
+no_resources_in_workspace: 'Cet espace ne contient actuellement aucune ressource'
+no_role_selected_message: 'Aucun rôle sélectionné'
+no_search_results: 'Votre recherche n''a retourné aucun résultat'
 no_tag: 'Il n''y a aucun Tag'
 no_user: 'Aucun utilisateur'
 no_workspace: 'Il n''y a aucun espace d''activités'
 non_personal_workspaces_only: 'Les espaces non personnels seulement'
 none: Aucun(e)
-not_allowed_message: 'Vous n''êtes pas autorisé(e) à effectuer cette action.'
+not_allowed_message: 'Vous n''êtes pas autorisé(e) à effectuer cette action'
 not_attempted: 'Pas tenté'
-not_blank_expected: 'Cette valeur ne peut pas être vide.'
+not_blank_expected: 'Cette valeur ne peut pas être vide'
 not_managed_by_claroline_repository: 'Etat indisponible'
 note: Note
-notification_activated: 'Notifications activées.'
-notification_deactivated: 'Notifications désactivées.'
+notification_activated: 'Notifications activées'
+notification_deactivated: 'Notifications désactivées'
 notifications: Notifications
 number: Nombre
 number_of_attempts: 'Nombre de tentatives'
@@ -657,7 +657,7 @@ ok: Ok
 only_for_workspace_creation: 'Seulement pour la création d''un espace d''activités'
 open: Ouvrir
 open_resource_when_opening_ws: 'Ouvrir une ressource à l''ouverture de l''espace d''activités'
-operation_done: 'Opération effectuée.'
+operation_done: 'Opération effectuée'
 options: Options
 or: Ou
 order: Ordre
@@ -665,16 +665,16 @@ organize_admin_tags: 'Organiser les Tags administrateur'
 organize_categories: 'Organiser les catégories'
 organize_private_tags: 'Organiser les Tags personnels'
 others: Autres
-over_max_length: 'Cette valeur est trop longue.'
+over_max_length: 'Cette valeur est trop longue'
 owner: Propriétaire
 owner_s: Propriétaire(s)
 parameters: Paramètres
-parameters_save_error: Une erreur est survenue pendant la sauvegarde des paramètres.
-parameters_save_success: Paramètres sauvegardés avec succès.
+parameters_save_error: Une erreur est survenue pendant la sauvegarde des paramètres
+parameters_save_success: Paramètres sauvegardés avec succès
 passed: Réussi
 passing_score: Score pour réussir
 password: Mot de passe
-password_mismatch: Les mots de passe ne correspondent pas.
+password_mismatch: Les mots de passe ne correspondent pas
 password_ok: Votre mot de passe a été modifié. Vous pouvez maintenant vous connecter.
 paste: Coller
 path: Emplacement
@@ -683,8 +683,8 @@ pending: En attente
 pending_friends: Amis en attente
 pending_users_list: Liste des utilisateurs en attente
 permissions: Permissions
-personal_data: 'Aucune donnée personnelle ne sera récupérée. Les données techniques et statistiques récupérées seront exclusivement utilisées en relation avec le projet Claroline Connect et ne seront pas diffusées autrement.'
-personal_workspace: Espace personne
+personal_data: 'Aucune donnée personnelle ne sera récupérée. Les données techniques et statistiques récupérées seront exclusivement utilisées en relation avec le projet et ne seront pas diffusées autrement'
+personal_workspace: Espace personnel
 personal_workspace_management: Gestion de l'espace personnel
 personal_workspace_tools_management: Gestion des outils de l'espace personnel
 personal_workspaces_only: Les espaces personnels seulement
@@ -706,11 +706,11 @@ platform_refresh: Rafraîchir les fichiers de la plateforme
 platform_refresh_confirm: Êtes-vous sûr de vouloir rafraîchir les fichiers de la plateforme ?
 platform_role: Rôle plateforme
 platform_widgets: Widgets de la plateforme
-please_validate_your_account: Un courriel vient de vous être envoyé pour activer votre compte.
+please_validate_your_account: Un courriel vient de vous être envoyé pour activer votre compte
 please_wait: Veuillez patienter...
 port: Port
 portal: Portail de ressources
-portal_access_disabled: L'accès au portail est bloqué car aucune des ses options est activée.
+portal_access_disabled: L'accès au portail est bloqué car aucune de ses options n''est activée
 portal_configuration_updated_success: La configuration du portail de ressources a été modifiée avec succès
 portal_no_published_resources: Il paraît qu'il n'y a pas de ressources publiées sur le portail
 portal_resources_configuration: Choisissez les ressources à faire apparaître dans le portail
@@ -719,7 +719,7 @@ portal_search_total_results: '%totalItems% résultat(s) dans ''%type%'' [classé
 portal_short: Portail
 portfolio_url: 'Url d''accès à l''outil portfolio'
 position: Position
-positive_number_expected: Cette valeur doit être un nombre positif.
+positive_number_expected: Cette valeur doit être un nombre positif
 powered_by: Développé par
 preferences: Préférences
 preview: Aperçu
@@ -742,14 +742,14 @@ public_profile_url_tuning_only_once: 'La personnalisation de l''URL de votre pro
 public_registration: 'Inscription publique'
 public_unregistration: 'Désinscription publique'
 public_url_help: 'Note : Votre URL personnalisée doit comprendre au maximum 30 lettres ou chiffres. Ne pas utiliser d''espaces, de symboles ou de caractères spéciaux.'
-public_workspace_empty: 'Il n''y a aucun espace d''activités public.'
+public_workspace_empty: 'Il n''y a aucun espace d''activités public'
 public_workspaces: 'Espaces d''activités publics'
 publish: Publier
 publish_resource: 'Publier la ressource'
 published: Publié
 published_to_portal: Publié sur le portail de ressources
-published_to_portal_message: 'Cette option rendra la ressource accessible à tous les utilisateurs anonymes . Vous devrez enlever les droits aux anonymes dans la gestion des droits pour restreindre de nouveau l''accès.'
-put_back_permissions_after_update: 'N''oubliez pas de remettre les permissions d''origine après une mise à jour.'
+published_to_portal_message: 'Cette option rendra la ressource accessible à tous les utilisateurs anonymes. Vous devrez enlever les droits aux anonymes dans la gestion des droits pour restreindre de nouveau l''accès.'
+put_back_permissions_after_update: 'N''oubliez pas de remettre les permissions d''origine après une mise à jour'
 receiver: destinataire(s)
 recent_all_workspace_activities_overview: 'Aperçu de toutes les activités récentes de %workspaceName%'
 recursive_dir_action: 'Appliquer au contenu du répertoire et aux sous-répertoires'
@@ -769,7 +769,7 @@ registered_groups: 'Groupes enregistrés'
 registered_user_amount: 'Nombre de personnes inscrites'
 registered_users: 'Utilisateurs enregistrés'
 registration: Inscription
-registration_mail_content_override: 'Vous pouvez redéfinir ici le contenu du courriel d''inscription.'
+registration_mail_content_override: 'Vous pouvez redéfinir ici le contenu du courriel d''inscription'
 registration_to_workspaces: 'Inscription à des espaces d''activités'
 registration_validation: 'Validation de l''inscription'
 remove: Enlever
@@ -782,14 +782,14 @@ remove_field_confirm: 'Êtes-vous sur de vouloir supprimer le champ %name% ?'
 remove_group_confirm_message: 'Êtes-vous sûr de vouloir supprimer ce groupe ?'
 remove_group_from_model: 'Retirer un groupe'
 remove_group_from_model_confirm: 'Êtes-vous sûr de vouloir retirer le groupe %groupe% ?'
-remove_group_s_confirm_message: 'Êtes-vous sûr de vouloir supprimer ces %count% groupes?'
+remove_group_s_confirm_message: 'Êtes-vous sûr de vouloir supprimer ces %count% groupes ?'
 remove_message_confirm_message: 'Êtes-vous sûr de vouloir supprimer ce message ?'
-remove_message_s_confirm_message: 'Êtes-vous sûr de vouloir supprimer ces %count% messages?'
+remove_message_s_confirm_message: 'Êtes-vous sûr de vouloir supprimer ces %count% messages ?'
 remove_model: 'Supprimer un modèle'
 remove_model_confirm: 'Êtes-vous sûr de vouloir supprimer le modèle %name% ?'
 remove_resource_from_model: 'Retirer une ressource du modèle'
 remove_resource_from_model_comfirm: 'Êtes-vous sûr de vouloir retirer cette ressource ?'
-remove_role: 'Supprimer un rôle.'
+remove_role: 'Supprimer un rôle'
 remove_role_confirm: 'Êtes-vous sûr de vouloir supprimer le rôle %name% ?'
 remove_subcategory: 'Retirer la sous-catégorie'
 remove_user_confirm_message: 'Êtes-vous sûr de vouloir supprimer cet utilisateur ?'
@@ -821,9 +821,9 @@ reset_password_txt: 'Vous avez demandé la réinitialisation de votre mot de pas
 reset_pwd_form_password: 'Votre mot de passe actuel'
 resetting_your_password: 'Réinitialisation de votre mot de passe'
 resource: Ressource
-resource_action_denied_message: 'L''action %action% n''a pas pu être exécutée sur la resource ''%path%'': accès refusé.'
-resource_creation_denied: 'Vous n''avez pas la permission de créer une ressource dans le répertoire ''%path%'': accès refusé.'
-resource_creation_wrong_type: 'Vous n''avez pas la permission de créer un(e) %type% dans le répertoire ''%path%'': accès refusé.'
+resource_action_denied_message: 'L''action %action% n''a pas pu être exécutée sur la resource ''%path%'': accès refusé'
+resource_creation_denied: 'Vous n''avez pas la permission de créer une ressource dans le répertoire ''%path%'': accès refusé'
+resource_creation_wrong_type: 'Vous n''avez pas la permission de créer un(e) %type% dans le répertoire ''%path%'': accès refusé'
 resource_delete: 'Êtes-vous sûr de vouloir supprimer cette ressource ?'
 resource_limit_exceeded: 'La limite maximale (%max%) de ressources est dépassée. Vous avez déjà créé %current% ressources.'
 resource_picker: 'Sélecteur de ressources'
@@ -851,13 +851,13 @@ rights_management: 'Gestion des droits'
 role: Rôle
 role_creation: 'Création d''un rôle'
 role_edition: 'Modification d''un rôle'
-role_limit_reached: 'La limite d''utilisateur de type %translationKey% a été atteinte.'
+role_limit_reached: 'La limite d''utilisateur de type %translationKey% a été atteinte'
 role_list: 'Liste des roles'
-role_name_changed_success: 'Le nom du rôle a été mis à jour avec succès.'
+role_name_changed_success: 'Le nom du rôle a été mis à jour avec succès'
 role_name_type_form_translationKey: Nom
 roles: Rôles
-roles_facet_form_explanation: 'Ce formulaire vous permet de spécifier quels rôles peuvent voir la facette dans le profil public de l''utilisateur.'
-roles_fields_form_explanation: 'Ce formulaire vous permet de spécifier quels rôles peuvent voir et éditer le champ dans le profil public de l''utilisateur.'
+roles_facet_form_explanation: 'Ce formulaire vous permet de spécifier quels rôles peuvent voir la facette dans le profil public de l''utilisateur'
+roles_fields_form_explanation: 'Ce formulaire vous permet de spécifier quels rôles peuvent voir et éditer le champ dans le profil public de l''utilisateur'
 roles_management: 'Gestion des rôles'
 save: Sauvegarder
 save_as_template: 'Exporter'
@@ -900,18 +900,18 @@ send_mail: 'Envoyer un courriel'
 send_mail_at_workspace_registration: 'Envoyer un courriel lors de l''inscription d''un utilisateur à un espace d''activités'
 send_message: 'Envoyer un message'
 send_message_to_workspace: 'Envoyer un message'
-send_message_to_workspace_info: 'Cette liste reprend les espaces d''activités dont vous êtes le gestionnaire.'
+send_message_to_workspace_info: 'Cette liste reprend les espaces d''activités dont vous êtes le gestionnaire'
 server: Serveur
 session: Session
 session_db_cannot_perform_operations: 'L''écriture et/ou la lecture d''enregistrements dans la table renseignée est impossible. Veuillez vérifier que l''utilisateur de la base de données dispose de droits suffisants et qu''aucune contrainte particulière n''a été affectée à cette table.'
-session_db_id_col_must_be_pk: 'La colonne des identifiants (et uniquement cette colonne) doit être la clé primaire de la table.'
-session_db_invalid_type_data_col: 'La colonne des données doit être de type "text" (e.g. "LONGTEXT").'
-session_db_invalid_type_id_col: 'La colonne des identifiants doit être de type "string" (e.g. "VARCHAR").'
-session_db_invalid_type_time_col: 'La colonne des durées doit être de type "integer" (e.g. "INT").'
-session_db_no_data_col: 'La colonne des données n''existe pas.'
-session_db_no_id_col: 'La colonne des identifiants n''existe pas.'
-session_db_no_table: 'La table renseignée n''existe pas.'
-session_db_no_time_col: 'La colonne des durées n''existe pas.'
+session_db_id_col_must_be_pk: 'La colonne des identifiants (et uniquement cette colonne) doit être la clé primaire de la table'
+session_db_invalid_type_data_col: 'La colonne des données doit être de type "text" (e.g. "LONGTEXT")'
+session_db_invalid_type_id_col: 'La colonne des identifiants doit être de type "string" (e.g. "VARCHAR")'
+session_db_invalid_type_time_col: 'La colonne des durées doit être de type "integer" (e.g. "INT")'
+session_db_no_data_col: 'La colonne des données n''existe pas'
+session_db_no_id_col: 'La colonne des identifiants n''existe pas'
+session_db_no_table: 'La table renseignée n''existe pas'
+session_db_no_time_col: 'La colonne des durées n''existe pas'
 session_id: 'Identifiant de session'
 session_lifetime: 'Durée de la session'
 settings: Paramètres
@@ -951,7 +951,7 @@ subscribe_selected_users: Inscrire les utilisateurs sélectionnés
 subscribe_users: Inscrire des utilisateurs
 subscription: Inscription
 success_rate: Taux de réussite
-successfull_workspace_creation: L'espace d'activités %name% a été créé avec succès.
+successfull_workspace_creation: L'espace d'activités %name% a été créé avec succès
 support_email: Courriel du support
 switch: Echanger
 tab: Onglet
@@ -964,17 +964,17 @@ tags_hierarchy: Hiérarchie des Tags
 tags_list: 'Liste des Tags'
 tags_management: Gestion des Tags
 tags_organization: Organisation des Tags
-teacher: Professeur
+teacher: Enseignant
 technical: Techniques
 technical_data: URL, version, langue principale, IP et courriel du support
 term_of_service: Conditions d''utilisation
 term_of_service_activation_message: 'Activez les conditions d''utilisation dans la plateforme'
-terms_enabled_but_empty: 'Les conditions d''utilisation ne peuvent être activées que si le texte est fourni dans au moins une langue.'
+terms_enabled_but_empty: 'Les conditions d''utilisation ne peuvent être activées que si le texte est fourni dans au moins une langue'
 terms_of_service_acceptance: 'J''accepte les conditions d''utilisation'
 test_repository_activated: 'Les dépôts de test sont activés'
 text: Texte
 text_title_color: Couleur du texte dans le titre
-the_following_users_were_not_imported: 'Les utilisateurs suivants n''ont pas pu être importés:'
+the_following_users_were_not_imported: 'Les utilisateurs suivants n''ont pas pu être importés :'
 the_workspace: 'L''espace d''activités'
 theme: Thème
 this_page_requires_authentication: 'Cette page requiert une authentification. Veuillez vous identifier.'
@@ -1018,8 +1018,8 @@ traffic: Fréquentation
 transport: Transport
 trash: Corbeille
 tune: Personnaliser
-tune_public_url_error: 'Une erreur s''est produite lors de la personnalisation de l''URL de votre profil public.'
-tune_public_url_success: 'Personnalisation de l''URL de votre profil public effectuée avec succès.'
+tune_public_url_error: 'Une erreur s''est produite lors de la personnalisation de l''URL de votre profil public'
+tune_public_url_success: 'Personnalisation de l''URL de votre profil public effectuée avec succès'
 tune_your_public_profile: 'Personnalisez votre profil public'
 tune_your_public_profile_url: 'Personnalisez l''URL de votre profil public'
 type: Type
@@ -1028,8 +1028,8 @@ unable_to_start_gmail: 'La connexion avec le service SMTP de Gmail ne peut pas �
 unable_to_start_sendmail: 'La connexion avec Sendmail ou Postfix ne peut pas être établie. Veuillez vérifier qu''un de ces logiciels est installé et correctement configuré.'
 unable_to_start_smtp: 'La connexion avec le serveur SMTP ne peut pas être établie. Veuillez vérifier que les paramètres que vous avez renseignés sont corrects.'
 unable_to_start_transport: 'La connexion avec le serveur de courriels ne peut pas être établie. Veuillez vérifier que les paramètres que vous avez renseignés sont corrects.'
-unauthorized: 'Vous n''êtes pas autorisé à consulter cette page.'
-unavailable_platform: 'La plateforme n''est pas disponible.'
+unauthorized: 'Vous n''êtes pas autorisé à consulter cette page'
+unavailable_platform: 'La plateforme n''est pas disponible'
 unavailable_role: 'Le rôle %translationKey% n''est pas utilisable'
 uncompress_file: 'Décompresser le fichier si possible'
 under_min_length: 'Cette valeur est trop courte'
@@ -1040,7 +1040,7 @@ unpublished: 'Non publié'
 unregister: Désinscription
 unregister_from_a_workspace: 'Me désinscrire d''un espace d''activités'
 unregister_group_confirm_message: 'Êtes-vous sûr de vouloir désinscrire ce groupe ?'
-unregister_group_s_confirm_message: 'Êtes-vous sûr de vouloir désinscrire ces %count% groupes?'
+unregister_group_s_confirm_message: 'Êtes-vous sûr de vouloir désinscrire ces %count% groupes ?'
 unregister_user_confirm_message: 'Êtes-vous sûr de vouloir désinscrire cet utilisateur ?'
 unregister_user_s_confirm_message: 'Êtes-vous sûr de vouloir désinscrire ces %count% utilisateurs ?'
 unregistered: 'Non inscrit'
@@ -1065,10 +1065,10 @@ user: Utilisateur
 user_accounts: Comptes utilisateur
 user_enable_mail_notification_label: 'Activer les notifications par courriel'
 user_creation: 'Création d''un utilisateur'
-user_creation_success: 'Le compte utilisateur a été créé avec succès.'
+user_creation_success: 'Le compte utilisateur a été créé avec succès'
 user_info: 'Informations utilisateur'
 user_limit_reached: 'La limite de création d''utilisateurs a été atteinte.'
-user_limit_success_update: 'La limite d''utilisateurs par rôle a été mise à jour avec succès.'
+user_limit_success_update: 'La limite d''utilisateurs par rôle a été mise à jour avec succès'
 user_limit_too_low: 'Il y a déjà %total% %role%(s). La limite %newMax% est trop faible.'
 user_menu: 'Menu utilisateur'
 user_menu_configuration: 'Configuration du menu utilisateur'
@@ -1091,7 +1091,7 @@ users_from_group_registration: 'Inscription des utilisateurs du groupe'
 users_import: 'Importer des utilisateurs'
 users_list: 'Liste des utilisateurs'
 users_management: 'Gestion des utilisateurs'
-users_minimum_requirement_msg: 'Les utilisateurs doivent remplir ces conditions: login de 3 caractères, mot de passe de 4 caractères, courriel valide.'
+users_minimum_requirement_msg: 'Les utilisateurs doivent remplir ces conditions : login de 3 caractères, mot de passe de 4 caractères, courriel valide.'
 users_per_page: 'Utilisateurs par page'
 users_registration_in_workspace: 'Inscription des utilisateurs dans l''espace d''activités'
 users_visits: 'Visites des utilisateurs'
@@ -1106,8 +1106,8 @@ views: 'Nb vues'
 visibility: Visibilité
 visible: Visible
 visitor: Visiteur
-warning_user_impersonation: 'Vous êtes connecté en tant que %user%.'
-warning_workspace_impersonation: 'Vous êtes connecté en tant que %role% du workspace %workspace%.'
+warning_user_impersonation: 'Vous êtes connecté en tant que %user%'
+warning_workspace_impersonation: 'Vous êtes connecté en tant que %role% du workspace %workspace%'
 warnings: Attention
 widget: Widget
 widget_configuration: 'Configuration du widget'
@@ -1124,7 +1124,7 @@ with_role: 'avec le rôle'
 with_tutor: Tutoré
 workspace: 'Espace d''activités'
 workspace.create: 'Créer un nouvel espace d''activités'
-workspace.name_not_blank: 'Veuillez spécifier un nom pour cet espace d''activités.'
+workspace.name_not_blank: 'Veuillez spécifier un nom pour cet espace d''activités'
 workspace_activity_overview: 'Aperçu des activités récentes de %workspaceName%'
 workspace_administration: Administration
 workspace_classification: 'Classification des espaces d''activités'
@@ -1133,7 +1133,7 @@ workspace_creator: 'Créateur de l''espace'
 workspace_delete: 'Supprimer l''espace d''activités'
 workspace_delete_confirm_message: 'Etes-vous sûr de vouloir supprimer cet espace d''activités ?'
 workspace_delete_confirm_title: 'Confirmation de suppression'
-workspace_delete_success_message: 'L''espace d''activités "%workspaceName%" été supprimé.'
+workspace_delete_success_message: 'L''espace d''activités "%workspaceName%" été supprimé'
 workspace_display: Affichage
 workspace_home_tab_creation: 'Création d''un onglet pour les espaces d''activités'
 workspace_home_tab_edition: 'Edition de l''onglet pour les espaces d''activités'
@@ -1143,7 +1143,7 @@ workspace_list: 'Liste des espaces d''activités'
 workspace_management: 'L''espace d''activités a été créé le %creationDate%, par %creator%. Il y a %count% inscrit(s).'
 workspace_management_date_null: 'Il y a %count% inscrit(s). La date de création de l''espace et son créateur ne sont pas connus.'
 workspace_max_users: 'Nombre maximal d''utilisateurs par espace d''activités'
-workspace_model_invalid: 'Le modèle %model% n''existe pas à la ligne %line%.'
+workspace_model_invalid: 'Le modèle %model% n''existe pas à la ligne %line%'
 workspace_order_tool_edit_form_name: Nom
 workspace_queue_cancel_confirm_message: 'Voulez-vous vraiment annuler votre demande d''inscription à cet espace d''activités ?'
 workspace_queue_cancel_confirm_title: 'Annuler la demande d''inscription'
@@ -1161,7 +1161,7 @@ workspace_tag_remove_confirm_title: Retrait d'une catégorie
 workspace_template_form_name: Nom
 workspace_tools: Outils
 workspace_unregistration_confirm_title: 'Voulez-vous vous désinscrire de cet espace d''activités ?'
-workspace_user_invalid: 'L''utilisateur %username% n''existe pas à la ligne %line%.'
+workspace_user_invalid: 'L''utilisateur %username% n''existe pas à la ligne %line%'
 workspace_welcome: Accueil
 workspaces: Espaces d'activités
 workspaces_included_in_category: Espaces d'activités enregistrés dans cette catégorie
@@ -1204,7 +1204,7 @@ seconds: secondes
 time_ago: Il y a %count% %unit%
 mail_options: Options du courriel
 mailer_from: Champ "from" du courriel
-desktop_root_directory_upload_error: Vous ne pouvez pas ajouter de ressources à la racine du bureau.
+desktop_root_directory_upload_error: Vous ne pouvez pas ajouter de ressources à la racine du bureau
 pick_a_resource: Choisissez une ressource
 invalid_host: Hôte invalide (accès à %url% refusé).
 request_friend: Requête d'ami
@@ -1214,7 +1214,7 @@ add_pending: Ajouter une plateforme amie
 add_friend_confirm_message: Êtes-vous sûr de vouloir ajouter cette plateforme amie ?
 edit_client: Modifier le client
 0_or_1: 0 ou 1
-import_resources_explanation: L'import de ressources demande un fichier .zip généré par Claroline contenant le fichier manifest.yml. Si vous désirez importer un autre fichier zip, veuillez créer une ressource de type 'Fichier' et sélectionnez 'décompresser'.
+import_resources_explanation: L'import de ressources demande un fichier .zip généré par la plateforme contenant le fichier manifest.yml. Si vous désirez importer un autre fichier zip, veuillez créer une ressource de type 'Fichier' et sélectionnez 'décompresser'.
 root_rights_change_explanation: Cette page vous permet de modifier les permissions sur la ressource racine d'un espace d'activités. Si vous désirez affecter toutes les ressources, sélectionnez 'Appliquer au contenu du répertoire et sous répertoires'.
 registration_mail_validation: Validation de l'inscription des utilisateurs
 send_mail_info: Envoyer un courriel de confirmation (plateforme accessible sans confirmation de la réception du courriel)
@@ -1223,13 +1223,13 @@ replace_validation_email_message: qui affichera le lien de validation du courrie
 email_not_activated_part_1: Votre courriel n'a pas été validé (%email%). Cliquez
 email_not_activated_part_2: ici
 email_not_activated_part_3: pour l'activer
-email_confirmation_message: La plateforme ne peut pas vous envoyer tous les courriels tant que votre adresse n'a pas été confirmée.
+email_confirmation_message: La plateforme ne peut pas vous envoyer tous les courriels tant que votre adresse n'a pas été confirmée
 email_sent: Courriel de validation envoyé à l'adresse %email%. Veuillez consulter vos pourriels si vous n'avez rien reçu.
 email_validation: Validation du courriel
 email_validation_url_display: Veuillez vous rendre à l'url suivante pour confirmer votre courriel: %url%
 email_validated: Courriel validé
 oauth_application_request: L'application "%name%" désire se connecter à %platform%
-oauth_required_data: Les informations suivantes seront envoyées:
+oauth_required_data: Les informations suivantes seront envoyées :
 client_list: Liste des clients
 allow_authentication: Autoriser l'authentification
 user_subscription_notification_for_admin: s'est inscrit dans l'espace d'activités %workspace%
@@ -1238,7 +1238,7 @@ user_list: Liste des utilisateurs
 list: Lister
 group_list: Liste des groupes
 loading: Chargement
-register_to_workspace_account_exists: Vous avez déjà un compte? Identifiez-vous %link% pour vous inscrire.
+register_to_workspace_account_exists: Vous avez déjà un compte ? Identifiez-vous %link% pour vous inscrire.
 here: ici
 group_list: Liste des groupes
 box_number : Numéro de boîte
@@ -1257,14 +1257,14 @@ coordinates: Coordonnées
 address: Adresse
 add_users_to_group: Ajouter des utilisateurs à un groupe
 add_users_to_group_confirm: Êtes-vous sûr de vouloir ajouter le(s) utlisateur(s) [ %user_list% ] dans le groupe %group% ?
-user_added: Utilisateur %user% ajouté.
-user_removed: Utilisateur %user% supprimé.
+user_added: Utilisateur %user% ajouté
+user_removed: Utilisateur %user% supprimé
 remove_users_from_group: Supprimer des utilisateurs d'un groupe
 remove_users_from_group_confirm: Êtes-vous sûr de vouloir supprimer le(s) utilisateur(s) [ %user_list% ] du groupe %group% ?
 delete_groups: Supprimer des groupes
 delete_groups_confirm: Êtes-vous sûr de vouloir supprimer le(s) groupe(s) [ %group_list% ] ?
-group_removed: Groupe %group% supprimé.
-group_created: Groupe %group% créé.
+group_removed: Groupe %group% supprimé
+group_created: Groupe %group% créé
 edit_group: Modifier un groupe
 manage_group: Gérer les groupes
 init_password: Réinitialisation du mot de passe
@@ -1282,9 +1282,9 @@ activate: Activer
 version: Version
 origin: Origine
 cache_management: Gestion du cache
-cache_management_explanation: Votre dossier app/cache doit être vidé manuellement pour finaliser les changements.
+cache_management_explanation: Votre dossier app/cache doit être vidé manuellement pour finaliser les changements
 required_by: Requis par:
-require: Requiert:
+require: Requiert :
 requirement_warning: Attention aux prérequis
 roles_updated: Rôles mis à jour
 role_update: Mise à jour des rôles
@@ -1293,7 +1293,7 @@ add_roles: Ajouter des rôles
 csv_delete: Suppression par csv
 import_facets: Importer des facettes
 csv: Csv
-csv_format_facets: Format du csv:
+csv_format_facets: Format du csv :
 csv_format_facets_line_1: Première ligne: liste des facettes par nom séparées par des point-virgules (facette1;facette2;facette3;...)
 csv_format_facets_line_end: Lignes suivantes: username;valeur facette 1; valeur facette2; valeur facette3;...
 create_panel: Créer un panel
@@ -1303,7 +1303,7 @@ delete_panel: Supprimer un panel
 delete_panel_confirm: Êtes-vous sûr de vouloir supprimer ce panel ?
 edit_mode: Mode édition
 display_mode: Mode affichage
-roles_panels_form_explanation: Définissez l'accessibilité au panel par rôle.
+roles_panels_form_explanation: Définissez l'accessibilité au panel par rôle
 delete_field: Supprimer un champ
 delete_field_confirm: Êtes-vous vraiment sûr de vouloir supprimer ce champ ?
 facet_imported: Facettes importées
@@ -1323,12 +1323,12 @@ field_removed: Champ supprimé avec succès
 panel_roles_edited: Rôles du panel édités avec succès
 profile_preference_edited: Préférences du profil éditées avec succès
 organization: Organisation
-workspace_not_exists: L'espace d'activités %code% n'existe pas à la ligne %line%.
-tab_not_exists: 'L''onglet %tab% n''existe pas à la ligne %line%.'
-file_not_exists: 'Le fichier %file% n''existe pas à la ligne %line%.'
+workspace_not_exists: L'espace d'activités %code% n'existe pas à la ligne %line%
+tab_not_exists: 'L''onglet %tab% n''existe pas à la ligne %line%'
+file_not_exists: 'Le fichier %file% n''existe pas à la ligne %line%'
 use_honeypot: Activer le honeypot pour les anonymes (anti-pourriels)
 mandatory: Obligatoire
-leave_empty: Laissez ce champ vide pour prouver que vous n'êtes pas un robot.
+leave_empty: Laissez ce champ vide pour prouver que vous n'êtes pas un robot
 field_not_empty: Veuillez laisser le champ vide
 disable: Désactiver
 enable: Activer
